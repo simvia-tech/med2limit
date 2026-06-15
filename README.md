@@ -13,7 +13,7 @@ Convert Code_Aster MED/RMED simulation results into LIMIT `.linp` / `.lui` input
 
 ## Installation
 
-MEDCoupling must come from conda-forge — not pip. Inside a conda environment:
+MEDCoupling with pip into a virtual python environnement (venv):
 
 ```bash
 python3 -m venv .venv
