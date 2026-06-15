@@ -37,7 +37,7 @@ med2limit input.rmed output.linp output.lui --groups "Shell1,Shell2" --nsets "We
 With separate orientation file:
 
 ```bash
-med2limit input.rmed output.linp output.lui carcoc.rmed --groups "Shell1,Shell2"
+med2limit input.rmed output.linp output.lui 01_carcoc.rmed --groups "Shell1,Shell2" --nsets "WeldNo"
 ```
 
 ### Python API
