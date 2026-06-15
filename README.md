@@ -25,15 +25,19 @@ pip install -e ".[dev]"              # with pytest, ruff, black
 ## Usage
 
 ### Command line
+From 01_exemple in folder:
+```bash
+med2limit/exemples/data
+```
 
 ```bash
-med2limit input.rmed output.linp output.lui --groups "Shell1,Shell2" --nsets "Weld"
+med2limit input.rmed output.linp output.lui --groups "Shell1,Shell2" --nsets "WeldNo"
 ```
 
 With separate orientation file:
 
 ```bash
-med2limit input.rmed output.linp output.lui orient.rmed --groups "Shell1,Shell2"
+med2limit input.rmed output.linp output.lui carcoc.rmed --groups "Shell1,Shell2"
 ```
 
 ### Python API
