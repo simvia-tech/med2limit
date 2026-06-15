@@ -16,7 +16,8 @@ Convert Code_Aster MED/RMED simulation results into LIMIT `.linp` / `.lui` input
 MEDCoupling must come from conda-forge — not pip. Inside a conda environment:
 
 ```bash
-conda install -c conda-forge medcoupling numpy
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -e .                     # editable install of med2limit
 pip install -e ".[dev]"              # with pytest, ruff, black
 ```
@@ -50,24 +51,6 @@ conv = MEDToLimitConverter(
 conv.convert()
 ```
 
-### Step-by-step debug (notebook / IDE)
-
-```python
-conv = MEDToLimitConverter(...)
-conv.step_1_load()
-print(conv.reader.field_names())
-
-conv.step_2_extract_mesh()
-print(conv.mesh.element_sets.keys())
-
-conv.step_3_extract_fields()
-conv.step_4_load_shell_metadata()
-print(conv.shell_meta.carcoque_ep)
-
-conv.step_5_filter()
-conv.step_6_write()
-```
-
 ## Package layout
 
 ```
@@ -90,8 +73,6 @@ The `examples/` folder contains ready-to-run scripts for typical workflows:
 
 ```bash
 python examples/01_shell_basic.py
-python examples/02_shell_multi_thickness.py
-python examples/03_step_by_step_debug.py
 ```
 
 Edit the paths at the top of each script before running.
