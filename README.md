@@ -31,13 +31,13 @@ med2limit/exemples/data
 ```
 
 ```bash
-med2limit input.rmed output.linp output.lui --groups "Shell1,Shell2" --nsets "WeldNo"
+med2limit 01_exemple.rmed output.linp output.lui --groups "Shell1,Shell2" --nsets "WeldNo"
 ```
 
 With separate orientation file:
 
 ```bash
-med2limit input.rmed output.linp output.lui 01_carcoc.rmed --groups "Shell1,Shell2" --nsets "WeldNo"
+med2limit 01_exemple.rmed output.linp output.lui 01_carcoc.rmed --groups "Shell1,Shell2" --nsets "WeldNo"
 ```
 
 ### Python API
