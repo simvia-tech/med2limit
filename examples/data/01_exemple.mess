@@ -1,0 +1,1160 @@
+setting '--memory' value to 72000.00 MB (keyword RESERVE_MEMOIRE)
+copying '/home/user/data/01_Shell1.med' to 'fort.20'...
+copying '/home/user/data/01_Shell2.med' to 'fort.21'...
+checking MPI initialization...
+using COMM_WORLD.
+MPI is initialized.
+Ouverture en écriture du fichier ./vola.1
+
+<INFO> Démarrage de l'exécution.
+
+                        -- CODE_ASTER -- VERSION : EXPLOITATION (stable) --                         
+                               Version 17.4.0 modifiée le 02/01/2026                                
+                              révision spack-local - branche 'v17.4.0'                              
+                                   Copyright EDF R&D 1991 - 2026                                    
+                                                                                                    
+                              Exécution du : Mon Jun 15 14:06:43 2026                               
+                                  Nom de la machine : f315edc449d5                                  
+                                        Architecture : 64bit                                        
+                                    Type de processeur : x86_64                                     
+       Système d'exploitation : Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.36        
+                                  Langue des messages : en (UTF-8)                                  
+                                    Version de Python : 3.11.14                                     
+                                     Version de NumPy : 1.26.4                                      
+                                      Parallélisme MPI : actif                                      
+                                   Rang du processeur courant : 0                                   
+                               Nombre de processeurs MPI utilisés : 1                               
+                                    Parallélisme OpenMP : actif                                     
+                              Nombre de processus OpenMP utilisés : 1                               
+                               Version de la librairie HDF5 : 1.10.7                                
+                                Version de la librairie MED : 4.2.0                                 
+                               Version de la librairie MFront : 5.0.0                               
+                               Version de la librairie MUMPS : 5.6.2                                
+                              Version de la librairie PETSc : 3.24.0p0                              
+                              Version de la librairie SCOTCH : 7.0.10                               
+
+starting the execution...
+Valeur initiale du temps CPU maximum =   300000 secondes
+  Valeur du temps CPU maximum passé aux commandes =   270000 secondes
+  Réserve CPU prévue = 30000 secondes
+
+Ouverture en écriture du fichier ./glob.1
+
+Ouverture en écriture du fichier ./vola.1
+
+Ouverture en lecture du fichier
+/opt/spack/opt/spack/linux-zen2/code-aster-17.4.0-ecm2bfgr5obydotnlte6xilvggppqnap/lib64/aster/elem
+1
+
+Nom de la base                          :  ELEMBASE
+     Créée avec la version                   :  17.04.00
+     Nombre d'enregistrements utilisés       :  46
+     Nombre d'enregistrements maximum        :  512
+     Nombre d'enregistrements par fichier    :  512
+     Longueur d'enregistrement (octets)      :  819200
+     Nombre d'identificateurs utilisés       :  123
+     Taille maximum du répertoire            :  300
+     Pourcentage d'utilisation du répertoire :  41 %
+
+Ouverture en lecture du fichier
+/opt/spack/opt/spack/linux-zen2/code-aster-17.4.0-ecm2bfgr5obydotnlte6xilvggppqnap/lib64/aster/elem
+1
+
+Nom de la base                          :  ELEMBASE
+     Nombre d'enregistrements utilisés       :  46
+     Nombre d'enregistrements maximum        :  512
+     Nombre d'enregistrements par fichier    :  512
+     Longueur d'enregistrement (octets)      :  819200
+     Nombre total d'accès en lecture         :  64
+     Volume des accès en lecture             :         50.00 Mo.
+     Nombre total d'accès en écriture        :  0
+     Volume des accès en écriture            :          0.00 Mo.
+     Nombre d'identificateurs utilisés       :  123
+     Taille maximum du répertoire            :  300
+     Pourcentage d'utilisation du répertoire :  41 %
+
+Relecture des catalogues des éléments faite.
+
+Fin de lecture (durée  0.046663  s.) 
+
+                      Mémoire limite pour l'allocation dynamique : 72567.86 Mo                      
+                         ajouté à l'initialisation du processus : 648.53 Mo                         
+                              Limite cible du processus : 73216.39 Mo                               
+                         Taille limite des fichiers d'échange : 2048.00 Go                          
+# Mémoire (Mo) :   648.53 /   640.41 /   207.61 /   183.67 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0001   user+syst:        0.02s (syst:        0.29s, elaps:        0.30s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt15
+# ----------------------------------------------------------------------------------------------
+# Commande #0002 de 01_exemple.comm.changed.py, ligne 15
+Shell1 = LIRE_MAILLAGE(FORMAT='MED',
+                       INFO=2,
+                       INFO_MED=0,
+                       PARTITIONNEUR='SANS',
+                       UNITE=20,
+                       VERI_MAIL=_F(APLAT=0.001,
+                                    VERIF='OUI'))
+
+Nom MED du maillage : Shell1
+
+
+------------ MAILLAGE 00000001 - IMPRESSIONS NIVEAU  2 ------------
+
+
+NOMBRE DE NOEUDS                          39
+
+NOMBRE DE MAILLES                         76
+                              SEG2                   20
+                              TRIA3                  56
+
+NOMBRE DE GROUPES DE MAILLES               2
+                              Fix1                                 5
+                              Shell1                              56
+
+               ------  LISTE DES NOEUDS                  ------
+
+         1  1                                    0.00000D+00     0.00000D+00     0.50000D+02
+         2  2                                    0.50000D+02     0.00000D+00     0.50000D+02
+         3  3                                    0.50000D+02     0.00000D+00     0.00000D+00
+         4  4                                    0.00000D+00     0.00000D+00     0.00000D+00
+         5  5                                    0.10050D+02     0.00000D+00     0.00000D+00
+         6  6                                    0.20050D+02     0.00000D+00     0.00000D+00
+         7  7                                    0.30050D+02     0.00000D+00     0.00000D+00
+         8  8                                    0.40050D+02     0.00000D+00     0.00000D+00
+         9  9                                    0.50000D+02     0.00000D+00     0.10050D+02
+        10  10                                   0.50000D+02     0.00000D+00     0.20050D+02
+        11  11                                   0.50000D+02     0.00000D+00     0.30050D+02
+        12  12                                   0.50000D+02     0.00000D+00     0.40050D+02
+        13  13                                   0.39950D+02     0.00000D+00     0.50000D+02
+        14  14                                   0.29950D+02     0.00000D+00     0.50000D+02
+        15  15                                   0.19950D+02     0.00000D+00     0.50000D+02
+        16  16                                   0.99500D+01     0.00000D+00     0.50000D+02
+        17  17                                   0.00000D+00     0.00000D+00     0.39950D+02
+        18  18                                   0.00000D+00     0.00000D+00     0.29950D+02
+        19  19                                   0.00000D+00     0.00000D+00     0.19950D+02
+        20  20                                   0.00000D+00     0.00000D+00     0.99500D+01
+        21  21                                   0.13982D+02     0.00000D+00     0.10084D+02
+        22  22                                   0.24779D+02     0.00000D+00     0.91173D+01
+        23  23                                   0.34719D+02     0.00000D+00     0.81859D+01
+        24  24                                   0.43038D+02     0.00000D+00     0.69259D+01
+        25  25                                   0.40667D+02     0.00000D+00     0.16212D+02
+        26  26                                   0.41986D+02     0.00000D+00     0.26689D+02
+        27  27                                   0.41917D+02     0.00000D+00     0.36544D+02
+        28  28                                   0.34175D+02     0.00000D+00     0.41741D+02
+        29  29                                   0.25142D+02     0.00000D+00     0.39670D+02
+        30  30                                   0.15879D+02     0.00000D+00     0.42829D+02
+        31  31                                   0.80692D+01     0.00000D+00     0.41550D+02
+        32  32                                   0.66855D+01     0.00000D+00     0.33374D+02
+        33  33                                   0.87511D+01     0.00000D+00     0.22060D+02
+        34  34                                   0.30033D+02     0.00000D+00     0.17285D+02
+        35  35                                   0.19938D+02     0.00000D+00     0.19562D+02
+        36  36                                   0.34101D+02     0.00000D+00     0.32575D+02
+        37  37                                   0.15891D+02     0.00000D+00     0.32692D+02
+        38  38                                   0.34605D+02     0.00000D+00     0.24057D+02
+        39  39                                   0.26527D+02     0.00000D+00     0.27410D+02
+
+               ------  LISTE DES MAILLES                 ------
+
+         1  1                         SEG2             4         5
+         2  2                         SEG2             5         6
+         3  3                         SEG2             6         7
+         4  4                         SEG2             7         8
+         5  5                         SEG2             8         3
+         6  6                         SEG2             3         9
+         7  7                         SEG2             9        10
+         8  8                         SEG2            10        11
+         9  9                         SEG2            11        12
+        10  10                        SEG2            12         2
+        11  11                        SEG2             2        13
+        12  12                        SEG2            13        14
+        13  13                        SEG2            14        15
+        14  14                        SEG2            15        16
+        15  15                        SEG2            16         1
+        16  16                        SEG2             1        17
+        17  17                        SEG2            17        18
+        18  18                        SEG2            18        19
+        19  19                        SEG2            19        20
+        20  20                        SEG2            20         4
+        21  21                        TRIA3            4         5        20
+        22  22                        TRIA3            5         6        21
+        23  23                        TRIA3            6         7        22
+        24  24                        TRIA3            6        22        21
+        25  25                        TRIA3            7         8        23
+        26  26                        TRIA3            7        23        22
+        27  27                        TRIA3            8         3        24
+        28  28                        TRIA3           23         8        24
+        29  29                        TRIA3            3         9        24
+        30  30                        TRIA3            9        10        25
+        31  31                        TRIA3            9        25        24
+        32  32                        TRIA3           10        11        26
+        33  33                        TRIA3           10        26        25
+        34  34                        TRIA3           11        12        27
+        35  35                        TRIA3           11        27        26
+        36  36                        TRIA3           12         2        13
+        37  37                        TRIA3           13        14        28
+        38  38                        TRIA3           14        15        29
+        39  39                        TRIA3           14        29        28
+        40  40                        TRIA3           15        16        30
+        41  41                        TRIA3           15        30        29
+        42  42                        TRIA3           16         1        31
+        43  43                        TRIA3           30        16        31
+        44  44                        TRIA3            1        17        31
+        45  45                        TRIA3           17        18        32
+        46  46                        TRIA3           17        32        31
+        47  47                        TRIA3           18        19        33
+        48  48                        TRIA3           18        33        32
+        49  49                        TRIA3           19        20        33
+        50  50                        TRIA3           20         5        21
+        51  51                        TRIA3           12        13        27
+        52  52                        TRIA3           13        28        27
+        53  53                        TRIA3           33        20        21
+        54  54                        TRIA3           22        23        34
+        55  55                        TRIA3           21        22        35
+        56  56                        TRIA3           22        34        35
+        57  57                        TRIA3           26        27        36
+        58  58                        TRIA3           27        28        36
+        59  59                        TRIA3           24        25        23
+        60  60                        TRIA3           23        25        34
+        61  61                        TRIA3           30        31        37
+        62  62                        TRIA3           31        32        37
+        63  63                        TRIA3           29        30        37
+        64  64                        TRIA3           28        29        36
+        65  65                        TRIA3           32        33        37
+        66  66                        TRIA3           33        21        35
+        67  67                        TRIA3           37        33        35
+        68  68                        TRIA3           25        26        38
+        69  69                        TRIA3           25        38        34
+        70  70                        TRIA3           26        36        38
+        71  71                        TRIA3           37        35        39
+        72  72                        TRIA3           34        38        39
+        73  73                        TRIA3           35        34        39
+        74  74                        TRIA3           36        29        39
+        75  75                        TRIA3           29        37        39
+        76  76                        TRIA3           36        39        38
+
+               ------  LISTE DES GROUPES DE MAILLES      ------
+
+         1  Fix1                             5        16        17        18        19        20
+         2  Shell1                          56        21        22        23        24        25
+                                      26        27        28        29        30
+                                      31        32        33        34        35
+                                      36        37        38        39        40
+                                      41        42        43        44        45
+                                      46        47        48        49        50
+                                      51        52        53        54        55
+                                      56        57        58        59        60
+                                      61        62        63        64        65
+                                      66        67        68        69        70
+                                      71        72        73        74        75
+                                      76
+
+--------------------------------------------------------------------------------
+
+Vérification du maillage.
+
+# Résultat commande #0002 (LIRE_MAILLAGE): Shell1 ('<00000001>') de type <Mesh>
+# Mémoire (Mo) :   648.53 /   641.12 /   207.61 /   183.67 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0002   user+syst:        0.01s (syst:        0.00s, elaps:        0.02s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt17
+# ----------------------------------------------------------------------------------------------
+# Commande #0003 de 01_exemple.comm.changed.py, ligne 17
+Shell2 = LIRE_MAILLAGE(FORMAT='MED',
+                       INFO=2,
+                       INFO_MED=0,
+                       PARTITIONNEUR='SANS',
+                       UNITE=21,
+                       VERI_MAIL=_F(APLAT=0.001,
+                                    VERIF='OUI'))
+
+Nom MED du maillage : Shell2
+
+
+------------ MAILLAGE 00000002 - IMPRESSIONS NIVEAU  2 ------------
+
+
+NOMBRE DE NOEUDS                          64
+
+NOMBRE DE MAILLES                        126
+                              SEG2                   28
+                              TRIA3                  98
+
+NOMBRE DE GROUPES DE MAILLES               3
+                              Weld                                 7
+                              Fix2                                 7
+                              Shell2                              98
+
+               ------  LISTE DES NOEUDS                  ------
+
+         1  1                                    0.50000D+02     0.00000D+00     0.50000D+02
+         2  2                                    0.10000D+03     0.00000D+00     0.50000D+02
+         3  3                                    0.10000D+03     0.00000D+00     0.00000D+00
+         4  4                                    0.50000D+02     0.00000D+00     0.00000D+00
+         5  5                                    0.57150D+02     0.00000D+00     0.00000D+00
+         6  6                                    0.64300D+02     0.00000D+00     0.00000D+00
+         7  7                                    0.71450D+02     0.00000D+00     0.00000D+00
+         8  8                                    0.78600D+02     0.00000D+00     0.00000D+00
+         9  9                                    0.85750D+02     0.00000D+00     0.00000D+00
+        10  10                                   0.92900D+02     0.00000D+00     0.00000D+00
+        11  11                                   0.10000D+03     0.00000D+00     0.71500D+01
+        12  12                                   0.10000D+03     0.00000D+00     0.14300D+02
+        13  13                                   0.10000D+03     0.00000D+00     0.21450D+02
+        14  14                                   0.10000D+03     0.00000D+00     0.28600D+02
+        15  15                                   0.10000D+03     0.00000D+00     0.35750D+02
+        16  16                                   0.10000D+03     0.00000D+00     0.42900D+02
+        17  17                                   0.92850D+02     0.00000D+00     0.50000D+02
+        18  18                                   0.85700D+02     0.00000D+00     0.50000D+02
+        19  19                                   0.78550D+02     0.00000D+00     0.50000D+02
+        20  20                                   0.71400D+02     0.00000D+00     0.50000D+02
+        21  21                                   0.64250D+02     0.00000D+00     0.50000D+02
+        22  22                                   0.57100D+02     0.00000D+00     0.50000D+02
+        23  23                                   0.50000D+02     0.00000D+00     0.42850D+02
+        24  24                                   0.50000D+02     0.00000D+00     0.35700D+02
+        25  25                                   0.50000D+02     0.00000D+00     0.28550D+02
+        26  26                                   0.50000D+02     0.00000D+00     0.21400D+02
+        27  27                                   0.50000D+02     0.00000D+00     0.14250D+02
+        28  28                                   0.50000D+02     0.00000D+00     0.71000D+01
+        29  29                                   0.59569D+02     0.00000D+00     0.63022D+01
+        30  30                                   0.67050D+02     0.00000D+00     0.67466D+01
+        31  31                                   0.74681D+02     0.00000D+00     0.70239D+01
+        32  32                                   0.82460D+02     0.00000D+00     0.70620D+01
+        33  33                                   0.90227D+02     0.00000D+00     0.66206D+01
+        34  34                                   0.94265D+02     0.00000D+00     0.12083D+02
+        35  35                                   0.94155D+02     0.00000D+00     0.18192D+02
+        36  36                                   0.93977D+02     0.00000D+00     0.25016D+02
+        37  37                                   0.93452D+02     0.00000D+00     0.32338D+02
+        38  38                                   0.93556D+02     0.00000D+00     0.40096D+02
+        39  39                                   0.88038D+02     0.00000D+00     0.44122D+02
+        40  40                                   0.81870D+02     0.00000D+00     0.43912D+02
+        41  41                                   0.74947D+02     0.00000D+00     0.43749D+02
+        42  42                                   0.67570D+02     0.00000D+00     0.43355D+02
+        43  43                                   0.59849D+02     0.00000D+00     0.43533D+02
+        44  44                                   0.55833D+02     0.00000D+00     0.38034D+02
+        45  45                                   0.56057D+02     0.00000D+00     0.31885D+02
+        46  46                                   0.56258D+02     0.00000D+00     0.24938D+02
+        47  47                                   0.56311D+02     0.00000D+00     0.17818D+02
+        48  48                                   0.55640D+02     0.00000D+00     0.11677D+02
+        49  49                                   0.70044D+02     0.00000D+00     0.14029D+02
+        50  50                                   0.62135D+02     0.00000D+00     0.13018D+02
+        51  51                                   0.87259D+02     0.00000D+00     0.14488D+02
+        52  52                                   0.87113D+02     0.00000D+00     0.27946D+02
+        53  53                                   0.88889D+02     0.00000D+00     0.21470D+02
+        54  54                                   0.85926D+02     0.00000D+00     0.36802D+02
+        55  55                                   0.71790D+02     0.00000D+00     0.36799D+02
+        56  56                                   0.78574D+02     0.00000D+00     0.38272D+02
+        57  57                                   0.63033D+02     0.00000D+00     0.35918D+02
+        58  58                                   0.64073D+02     0.00000D+00     0.21336D+02
+        59  59                                   0.61703D+02     0.00000D+00     0.28644D+02
+        60  60                                   0.78367D+02     0.00000D+00     0.14333D+02
+        61  61                                   0.78278D+02     0.00000D+00     0.30295D+02
+        62  62                                   0.68865D+02     0.00000D+00     0.29119D+02
+        63  63                                   0.82138D+02     0.00000D+00     0.21683D+02
+        64  64                                   0.73636D+02     0.00000D+00     0.21770D+02
+
+               ------  LISTE DES MAILLES                 ------
+
+         1  1                         SEG2             4         5
+         2  2                         SEG2             5         6
+         3  3                         SEG2             6         7
+         4  4                         SEG2             7         8
+         5  5                         SEG2             8         9
+         6  6                         SEG2             9        10
+         7  7                         SEG2            10         3
+         8  8                         SEG2             3        11
+         9  9                         SEG2            11        12
+        10  10                        SEG2            12        13
+        11  11                        SEG2            13        14
+        12  12                        SEG2            14        15
+        13  13                        SEG2            15        16
+        14  14                        SEG2            16         2
+        15  15                        SEG2             2        17
+        16  16                        SEG2            17        18
+        17  17                        SEG2            18        19
+        18  18                        SEG2            19        20
+        19  19                        SEG2            20        21
+        20  20                        SEG2            21        22
+        21  21                        SEG2            22         1
+        22  22                        SEG2             1        23
+        23  23                        SEG2            23        24
+        24  24                        SEG2            24        25
+        25  25                        SEG2            25        26
+        26  26                        SEG2            26        27
+        27  27                        SEG2            27        28
+        28  28                        SEG2            28         4
+        29  29                        TRIA3            4         5        28
+        30  30                        TRIA3            5         6        29
+        31  31                        TRIA3            6         7        30
+        32  32                        TRIA3            6        30        29
+        33  33                        TRIA3            7         8        31
+        34  34                        TRIA3            7        31        30
+        35  35                        TRIA3            8         9        32
+        36  36                        TRIA3            8        32        31
+        37  37                        TRIA3            9        10        33
+        38  38                        TRIA3            9        33        32
+        39  39                        TRIA3           10         3        11
+        40  40                        TRIA3           11        12        34
+        41  41                        TRIA3           12        13        35
+        42  42                        TRIA3           12        35        34
+        43  43                        TRIA3           13        14        36
+        44  44                        TRIA3           13        36        35
+        45  45                        TRIA3           14        15        37
+        46  46                        TRIA3           14        37        36
+        47  47                        TRIA3           15        16        38
+        48  48                        TRIA3           15        38        37
+        49  49                        TRIA3           16         2        17
+        50  50                        TRIA3           17        18        39
+        51  51                        TRIA3           18        19        40
+        52  52                        TRIA3           18        40        39
+        53  53                        TRIA3           19        20        41
+        54  54                        TRIA3           19        41        40
+        55  55                        TRIA3           20        21        42
+        56  56                        TRIA3           20        42        41
+        57  57                        TRIA3           21        22        43
+        58  58                        TRIA3           21        43        42
+        59  59                        TRIA3           22         1        23
+        60  60                        TRIA3           23        24        44
+        61  61                        TRIA3           24        25        45
+        62  62                        TRIA3           24        45        44
+        63  63                        TRIA3           25        26        46
+        64  64                        TRIA3           25        46        45
+        65  65                        TRIA3           26        27        47
+        66  66                        TRIA3           26        47        46
+        67  67                        TRIA3           28         5        29
+        68  68                        TRIA3           10        11        33
+        69  69                        TRIA3           16        17        38
+        70  70                        TRIA3           22        23        43
+        71  71                        TRIA3           27        28        48
+        72  72                        TRIA3           27        48        47
+        73  73                        TRIA3           30        31        49
+        74  74                        TRIA3           29        30        50
+        75  75                        TRIA3           30        49        50
+        76  76                        TRIA3           32        33        51
+        77  77                        TRIA3           38        17        39
+        78  78                        TRIA3           36        37        52
+        79  79                        TRIA3           35        36        53
+        80  80                        TRIA3           36        52        53
+        81  81                        TRIA3           11        34        33
+        82  82                        TRIA3           37        38        54
+        83  83                        TRIA3           37        54        52
+        84  84                        TRIA3           43        23        44
+        85  85                        TRIA3           41        42        55
+        86  86                        TRIA3           40        41        56
+        87  87                        TRIA3           41        55        56
+        88  88                        TRIA3           33        34        51
+        89  89                        TRIA3           42        43        57
+        90  90                        TRIA3           42        57        55
+        91  91                        TRIA3           48        28        29
+        92  92                        TRIA3           46        47        58
+        93  93                        TRIA3           45        46        59
+        94  94                        TRIA3           46        58        59
+        95  95                        TRIA3           31        32        60
+        96  96                        TRIA3           32        51        60
+        97  97                        TRIA3           38        39        54
+        98  98                        TRIA3           43        44        57
+        99  99                        TRIA3           48        29        50
+       100  100                       TRIA3           35        53        51
+       101  101                       TRIA3           57        44        45
+       102  102                       TRIA3           34        35        51
+       103  103                       TRIA3           40        56        54
+       104  104                       TRIA3           48        50        47
+       105  105                       TRIA3           39        40        54
+       106  106                       TRIA3           58        47        50
+       107  107                       TRIA3           49        31        60
+       108  108                       TRIA3           45        59        57
+       109  109                       TRIA3           54        56        61
+       110  110                       TRIA3           54        61        52
+       111  111                       TRIA3           55        57        62
+       112  112                       TRIA3           57        59        62
+       113  113                       TRIA3           53        52        63
+       114  114                       TRIA3           52        61        63
+       115  115                       TRIA3           56        55        61
+       116  116                       TRIA3           50        49        58
+       117  117                       TRIA3           51        53        63
+       118  118                       TRIA3           59        58        62
+       119  119                       TRIA3           58        49        64
+       120  120                       TRIA3           62        58        64
+       121  121                       TRIA3           49        60        64
+       122  122                       TRIA3           60        51        63
+       123  123                       TRIA3           61        55        62
+       124  124                       TRIA3           60        63        64
+       125  125                       TRIA3           62        64        61
+       126  126                       TRIA3           63        61        64
+
+               ------  LISTE DES GROUPES DE MAILLES      ------
+
+         1  Weld                             7        22        23        24        25        26
+                                      27        28
+         2  Fix2                             7         8         9        10        11        12
+                                      13        14
+         3  Shell2                          98        29        30        31        32        33
+                                      34        35        36        37        38
+                                      39        40        41        42        43
+                                      44        45        46        47        48
+                                      49        50        51        52        53
+                                      54        55        56        57        58
+                                      59        60        61        62        63
+                                      64        65        66        67        68
+                                      69        70        71        72        73
+                                      74        75        76        77        78
+                                      79        80        81        82        83
+                                      84        85        86        87        88
+                                      89        90        91        92        93
+                                      94        95        96        97        98
+                                      99       100       101       102       103
+                                     104       105       106       107       108
+                                     109       110       111       112       113
+                                     114       115       116       117       118
+                                     119       120       121       122       123
+                                     124       125       126
+
+--------------------------------------------------------------------------------
+
+Vérification du maillage.
+
+# Résultat commande #0003 (LIRE_MAILLAGE): Shell2 ('<00000002>') de type <Mesh>
+# Mémoire (Mo) :   648.53 /   641.12 /   207.61 /   183.67 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0003   user+syst:        0.01s (syst:        0.00s, elaps:        0.00s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt20
+# ----------------------------------------------------------------------------------------------
+# Commande #0004 de 01_exemple.comm.changed.py, ligne 20
+BGruppe = ASSE_MAILLAGE(MAILLAGE_1=Shell1,
+                        MAILLAGE_2=Shell2,
+                        OPERATION='SUPERPOSE')
+
+# Résultat commande #0004 (ASSE_MAILLAGE): BGruppe ('<00000003>') de type <Mesh>
+# Dépend de :
+# - Shell1 ('<00000001>') de type <Mesh>
+# - Shell2 ('<00000002>') de type <Mesh>
+# Mémoire (Mo) :   648.53 /   641.12 /   207.61 /   183.67 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0004   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt26
+# ----------------------------------------------------------------------------------------------
+# Commande #0005 de 01_exemple.comm.changed.py, ligne 26
+Modell = AFFE_MODELE(AFFE=_F(MODELISATION='DKT',
+                             PHENOMENE='MECANIQUE',
+                             TOUT='OUI'),
+                     DISTRIBUTION=_F(METHODE='SOUS_DOMAINE',
+                                     PARTITIONNEUR='METIS'),
+                     INFO=1,
+                     MAILLAGE=BGruppe,
+                     VERI_FORMULATION_IFS='OUI',
+                     VERI_JACOBIEN='OUI',
+                     VERI_NORM_IFS='OUI',
+                     VERI_PLAN='OUI')
+
+Sur les 202 mailles du maillage 00000003, on a demandé l'affectation de 202, on a pu en affecter
+202.
+Modélisation     Formulation      Type maille  Élément fini     Nombre
+_                _                SEG2         MEBODKT          48
+DKT              _                TRIA3        MEDKTR3          154
+#2      Calculs elementaires et assemblages               CPU (USER+SYST/SYST/ELAPS):      0.00      0.00      0.00
+# Résultat commande #0005 (AFFE_MODELE): Modell ('<00000004>') de type <Model>
+# Mémoire (Mo) :   769.85 /   769.85 /   207.61 /   197.07 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0005   user+syst:        0.02s (syst:        0.00s, elaps:        0.03s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt31
+# ----------------------------------------------------------------------------------------------
+# Commande #0006 de 01_exemple.comm.changed.py, ligne 31
+Elem = AFFE_CARA_ELEM(COQUE=(_F(A_CIS=0.8333333,
+                                COEF_RIGI_DRZ=1e-05,
+                                COQUE_NCOU=1,
+                                EPAIS=3.0,
+                                GROUP_MA='Shell1',
+                                MODI_METRIQUE='NON',
+                                VECTEUR=(1.0, 0.0, 0.0)),
+                             _F(A_CIS=0.8333333,
+                                COEF_RIGI_DRZ=1e-05,
+                                COQUE_NCOU=1,
+                                EPAIS=5.0,
+                                GROUP_MA='Shell2',
+                                MODI_METRIQUE='NON',
+                                VECTEUR=(0.0, 0.0, 1.0))),
+                      INFO=1,
+                      MODELE=Modell)
+
+
+     LE MODELE 00000004 CONTIENT : 
+                                      202 ELEMENT(S) COQUE           
+#2      Calculs elementaires et assemblages               CPU (USER+SYST/SYST/ELAPS):      0.00      0.00      0.00
+# Résultat commande #0006 (AFFE_CARA_ELEM): Elem ('<00000005>') de type <ElementaryCharacteristics>
+# Dépend de :
+# - Modell ('<00000004>') de type <Model>
+# Mémoire (Mo) :   769.85 /   769.85 /   207.61 /   197.07 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0006   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt41
+# ----------------------------------------------------------------------------------------------
+# Commande #0007 de 01_exemple.comm.changed.py, ligne 41
+Steel = DEFI_MATERIAU(ELAS=_F(B_ENDOGE=0.0,
+                              COEF_AMOR=1.0,
+                              E=210000.0,
+                              K_DESSIC=0.0,
+                              NU=0.3,
+                              RHO=7.85e-09),
+                      INFO=1)
+
+# Résultat commande #0007 (DEFI_MATERIAU): Steel ('<00000006>') de type <Material>
+# Mémoire (Mo) :   769.85 /   769.85 /   207.61 /   197.07 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0007   user+syst:        0.03s (syst:        0.00s, elaps:        0.04s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt45
+# ----------------------------------------------------------------------------------------------
+# Commande #0008 de 01_exemple.comm.changed.py, ligne 45
+Prop = AFFE_MATERIAU(AFFE=_F(MATER=Steel,
+                             TOUT='OUI'),
+                     INFO=1,
+                     MAILLAGE=BGruppe)
+
+# Résultat commande #0008 (AFFE_MATERIAU): Prop ('<00000007>') de type <MaterialField>
+# Mémoire (Mo) :   769.85 /   769.85 /   207.61 /   197.07 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0008   user+syst:        0.03s (syst:        0.00s, elaps:        0.04s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt49
+# ----------------------------------------------------------------------------------------------
+# Commande #0009 de 01_exemple.comm.changed.py, ligne 49
+Meca = AFFE_CHAR_MECA(DDL_IMPO=_F(DX=0.0,
+                                  DY=0.0,
+                                  DZ=0.0,
+                                  GROUP_MA=('Fix1', 'Fix2')),
+                      DOUBLE_LAGRANGE='OUI',
+                      INFO=1,
+                      LIAISON_MAIL=_F(DISTANCE_ALARME=11.0,
+                                      DISTANCE_MAX=10.0,
+                                      ELIM_MULT='OUI',
+                                      GROUP_MA_ESCL='Weld',
+                                      GROUP_MA_MAIT='Shell1',
+                                      TYPE_RACCORD='COQUE'),
+                      MODELE=Modell,
+                      PRES_REP=_F(GROUP_MA=('Shell1', 'Shell2'),
+                                  PRES=0.35),
+                      SYNTAXE='NON',
+                      VERI_AFFE='OUI',
+                      VERI_NORM='OUI')
+
+#4      Communications MPI                                CPU (USER+SYST/SYST/ELAPS):      0.00      0.00      0.00
+# Résultat commande #0009 (AFFE_CHAR_MECA): Meca ('<00000008>') de type <MechanicalLoadReal>
+# Mémoire (Mo) :   769.85 /   769.85 /   207.61 /   197.07 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0009   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt62
+# ----------------------------------------------------------------------------------------------
+# Commande #0010 de 01_exemple.comm.changed.py, ligne 62
+BGruppe = DEFI_GROUP(ALARME='OUI',
+                     CREA_GROUP_NO=_F(CRIT_NOEUD='TOUS',
+                                      GROUP_MA='Weld',
+                                      NOM='WeldNO'),
+                     MAILLAGE=BGruppe,
+                     reuse=BGruppe)
+
+
+
+NOMBRE  DE GROUPES DE NOEUDS CREES :      1
+=======================================
+
+               ------------------------------------------------------
+               !         NOM DU GROUPE         ! NBRE DE NOEUDS DU  !
+               !            NOEUDS             !      GROUPE_NO     !
+               ------------------------------------------------------
+               !  WeldNO                       !         8          !
+               ------------------------------------------------------
+
+# Résultat commande #0010 (DEFI_GROUP): BGruppe ('<00000003>') de type <Mesh>
+# Dépend de :
+# - Shell1 ('<00000001>') de type <Mesh>
+# - Shell2 ('<00000002>') de type <Mesh>
+# Mémoire (Mo) :   769.85 /   769.85 /   207.61 /   197.07 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0010   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt67
+# ----------------------------------------------------------------------------------------------
+# Commande #0011 de 01_exemple.comm.changed.py, ligne 67
+AmpInit = DEFI_FONCTION(INFO=1,
+                        INTERPOL='LIN',
+                        NOM_PARA='INST',
+                        NOM_RESU='TOUTRESU',
+                        PROL_DROITE='LINEAIRE',
+                        PROL_GAUCHE='LINEAIRE',
+                        VALE=(0, 0, 1, 1),
+                        VERIF='CROISSANT')
+
+# Résultat commande #0011 (DEFI_FONCTION): AmpInit ('<00000009>') de type <Function>
+# Mémoire (Mo) :   769.85 /   769.85 /   207.61 /   197.07 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0011   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt73
+# ----------------------------------------------------------------------------------------------
+# Commande #0012 de 01_exemple.comm.changed.py, ligne 73
+ListReel = DEFI_LIST_REEL(DEBUT=0,
+                          INFO=1,
+                          INTERVALLE=_F(JUSQU_A=1,
+                                        NOMBRE=1))
+
+# Résultat commande #0012 (DEFI_LIST_REEL): ListReel ('<0000000a>') de type <ListOfFloats>
+# Mémoire (Mo) :   769.85 /   769.85 /   207.61 /   197.07 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0012   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt77
+# ----------------------------------------------------------------------------------------------
+# Commande #0013 de 01_exemple.comm.changed.py, ligne 77
+ListInst = DEFI_LIST_INST(DEFI_LIST=_F(LIST_INST=ListReel),
+                          ECHEC=_F(ACTION='DECOUPE',
+                                   EVENEMENT='ERREUR',
+                                   SUBD_METHODE='MANUEL',
+                                   SUBD_NIVEAU=40,
+                                   SUBD_PAS=4,
+                                   SUBD_PAS_MINI=0.0),
+                          INFO=1,
+                          METHODE='MANUEL')
+
+Gestion manuelle de la liste d'instants.
+La liste d'instants contient 2 pas de temps et le pas de temps minimum vaut             1.
+Il y a 1 événements.
+L'événement 1 est pour capturer les erreurs.
+Si cet événement se déclenche, on découpe le pas de temps.
+La découpe du pas de temps est manuelle.
+On découpe le pas de temps en 4 incréments jusqu'à ce que le niveau atteigne 40.
+# Résultat commande #0013 (DEFI_LIST_INST): ListInst ('<0000000b>') de type <TimesList>
+# Dépend de :
+# - ListReel ('<0000000a>') de type <ListOfFloats>
+# Mémoire (Mo) :   769.85 /   769.85 /   207.61 /   197.07 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0013   user+syst:        0.00s (syst:        0.00s, elaps:        0.01s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt85
+# ----------------------------------------------------------------------------------------------
+# Commande #0014 de 01_exemple.comm.changed.py, ligne 85
+RESU = STAT_NON_LINE(AFFICHAGE=_F(INFO_RESIDU='NON',
+                                  INFO_TEMPS='NON'),
+                     ARCHIVAGE=_F(CHAM_EXCLU=('RESI_NOEU', 'RESI_RELA_NOEU'),
+                                  PAS_ARCH=1),
+                     CARA_ELEM=Elem,
+                     CHAM_MATER=Prop,
+                     COMPORTEMENT=_F(DEFORMATION='PETIT',
+                                     ITER_CPLAN_MAXI=10,
+                                     ITER_INTE_MAXI=20,
+                                     ITER_INTE_PAS=0,
+                                     PARM_THETA=1.0,
+                                     REGU_VISC='NON',
+                                     RELATION='ELAS',
+                                     RESI_CPLAN_RELA=1e-06,
+                                     RESI_INTE=1e-06,
+                                     TOUT='OUI'),
+                     CONVERGENCE=_F(ARRET='OUI',
+                                    ITER_GLOB_ELAS=25,
+                                    ITER_GLOB_MAXI=20,
+                                    RESI_GLOB_RELA=0.0001,
+                                    VERIF='TOUT'),
+                     EXCIT=_F(CHARGE=Meca,
+                              FONC_MULT=AmpInit,
+                              TYPE_CHARGE='FIXE_CSTE'),
+                     INCREMENT=_F(LIST_INST=ListInst,
+                                  NUME_INST_INIT=0),
+                     INFO=1,
+                     MESURE=_F(TABLE='NON'),
+                     METHODE='NEWTON',
+                     MODELE=Modell,
+                     NEWTON=_F(MATRICE='TANGENTE',
+                               MATR_RIGI_SYME='NON',
+                               REAC_INCR=1,
+                               REAC_ITER=1,
+                               REAC_ITER_ELAS=0),
+                     SOLVEUR=_F(ACCELERATION='AUTO',
+                                ELIM_LAGR='LAGR2',
+                                FILTRAGE_MATRICE=-1.0,
+                                GESTION_MEMOIRE='AUTO',
+                                LOW_RANK_SEUIL=0.0,
+                                MATR_DISTRIBUEE='NON',
+                                METHODE='MUMPS',
+                                MIXER_PRECISION='NON',
+                                NB_RHS=1,
+                                NPREC=8,
+                                PCENT_PIVOT=35,
+                                POSTTRAITEMENTS='AUTO',
+                                PRETRAITEMENTS='AUTO',
+                                REDUCTION_MPI=0,
+                                RENUM='AUTO',
+                                RESI_RELA=-1.0,
+                                STOP_SINGULIER='OUI',
+                                TYPE_RESOL='AUTO'))
+
+Liste des comportements
+
+Affecté sur 202 éléments
+Relation                             : ELAS
+Déformation                          : PETIT
+Pas de régularisation visqueuse
+Pas de post-traitement à la fin du pas de temps
+Nombre total de variables internes   : 1
+V1 : VIDE
+Le système linéaire à résoudre a 798 degrés de liberté:
+   - 618 sont des degrés de liberté physiques
+     (ils sont portés par 103 noeuds du maillage)
+   - 180 sont les couples de paramètres de Lagrange associés
+     aux 90 relations linéaires dualisées.
+La matrice est de taille 798 équations.
+  Elle contient 13701 termes non nuls si elle est symétrique et 26604 termes non nuls si elle n'est
+pas symétrique.
+  Soit un taux de remplissage de   4.178 %.
+Il n'y a pas d'état initial défini. On prend un état initial nul.
+Le champ <DEPL> est initialisé a zéro
+Le champ <SIEF_ELGA> est initialisé a zéro
+Le champ <VARI_ELGA> est initialisé a zéro
+Archivage de l'état initial
+Archivage des champs
+
+Champ stocké <DEPL> à l'instant  0.000000000000e+00 pour le numéro d'ordre 0
+Champ stocké <SIEF_ELGA> à l'instant  0.000000000000e+00 pour le numéro d'ordre 0
+Champ stocké <VARI_ELGA> à l'instant  0.000000000000e+00 pour le numéro d'ordre 0
+Champ stocké <COMPORTEMENT> à l'instant  0.000000000000e+00 pour le numéro d'ordre 0
+---------------------------------------------------------------------
+Instant de calcul:  1.000000000000e+00 - Niveau de découpe: 1
+
+---------------------------------------------------------------------
+|     NEWTON     |     RESIDU     |     RESIDU     |     OPTION     |
+|    ITERATION   |     RELATIF    |     ABSOLU     |   ASSEMBLAGE   |
+|                | RESI_GLOB_RELA | RESI_GLOB_MAXI |(+ TYPE MATRICE)|
+---------------------------------------------------------------------
+|     0          | 1.92023E-13    | 8.81032E-10    |TANGENTE   (SYM)|
+---------------------------------------------------------------------
+Critère(s) de convergence atteint(s)
+
+Le résidu de type <RESI_GLOB_RELA> vaut  1.920226565545e-13 au noeud et degré de liberté <67     
+DY>
+Temps CPU consommé dans ce pas de temps    : 0.018 s
+
+* Nombre d'itérations de Newton                     : 1
+* Temps total intégration comportement              : 0.007 s (2 intégrations)
+* Temps total factorisation matrice                 : 0.005 s (1 factorisations)
+* Temps construction second membre                  : 0.004 s
+* Temps total résolution K.U=F                      : 0.001 s (1 résolutions)
+* Temps assemblage matrice                          : 0.000 s
+* Temps autres opérations                           : 0.002 s
+Mémoire (Mo) :   774.24 /   771.95 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+
+Archivage des champs
+
+Champ stocké <DEPL> à l'instant  1.000000000000e+00 pour le numéro d'ordre 1
+Champ stocké <SIEF_ELGA> à l'instant  1.000000000000e+00 pour le numéro d'ordre 1
+Champ stocké <VARI_ELGA> à l'instant  1.000000000000e+00 pour le numéro d'ordre 1
+Champ stocké <COMPORTEMENT> à l'instant  1.000000000000e+00 pour le numéro d'ordre 1
+[100%] Instant calculé : 1.00000e+00, dernier instant archivé : 1.00000e+00, au numéro d'ordre :    
+1
+Temps CPU consommé dans le calcul          : 0.020 s
+
+dont temps CPU "perdu" dans les découpes            : 0.000 s
+* Nombre de pas de temps                            : 1
+* Nombre d'itérations de Newton                     : 1
+* Temps dans l'archivage                            : 0.000 s
+* Temps dans le post-traitement                     : 0.000 s
+* Temps total intégration comportement              : 0.007 s (2 intégrations)
+* Temps total factorisation matrice                 : 0.005 s (1 factorisations)
+* Temps construction second membre                  : 0.004 s
+* Temps total résolution K.U=F                      : 0.001 s (1 résolutions)
+* Temps assemblage matrice                          : 0.000 s
+#1      Resolution des systemes lineaires                 CPU (USER+SYST/SYST/ELAPS):      0.02      0.00      0.01
+#2      Calculs elementaires et assemblages               CPU (USER+SYST/SYST/ELAPS):      0.00      0.00      0.01
+#4      Communications MPI                                CPU (USER+SYST/SYST/ELAPS):      0.00      0.00      0.00
+# Résultat commande #0014 (STAT_NON_LINE): RESU ('<0000000c>') de type <NonLinearResult>
+# Mémoire (Mo) :   774.24 /   770.29 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0014   user+syst:        0.05s (syst:        0.00s, elaps:        0.04s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt95
+# ----------------------------------------------------------------------------------------------
+# Commande #0015 de 01_exemple.comm.changed.py, ligne 95
+RESU = CALC_CHAMP(CHAM_MATER=Prop,
+                  CONTRAINTE='SIEF_ELNO',
+                  CRITERE='RELATIF',
+                  CRITERES='SIEQ_ELNO',
+                  DEFORMATION='EPSI_ELNO',
+                  INFO=1,
+                  MODELE=Modell,
+                  PARALLELISME_TEMPS='NON',
+                  PRECISION=1e-06,
+                  RESULTAT=RESU,
+                  reuse=RESU)
+
+#2      Calculs elementaires et assemblages               CPU (USER+SYST/SYST/ELAPS):      0.01      0.00      0.01
+# Résultat commande #0015 (CALC_CHAMP): RESU ('<0000000c>') de type <NonLinearResult>
+# Dépend de :
+# - Modell ('<00000004>') de type <Model>
+# - Prop ('<00000007>') de type <MaterialField>
+# Mémoire (Mo) :   774.24 /   770.47 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0015   user+syst:        0.01s (syst:        0.00s, elaps:        0.02s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt110
+# ----------------------------------------------------------------------------------------------
+# Commande #0016 de 01_exemple.comm.changed.py, ligne 110
+SIEF_SUP = POST_CHAMP(EXTR_COQUE=_F(NIVE_COUCHE='SUP',
+                                    NOM_CHAM='SIEF_ELNO',
+                                    NUME_COUCHE=1),
+                      RESULTAT=RESU)
+
+# Résultat commande #0016 (POST_CHAMP): SIEF_SUP ('<0000000d>') de type <NonLinearResult>
+# Dépend de :
+# - RESU ('<0000000c>') de type <NonLinearResult>
+# Mémoire (Mo) :   774.24 /   770.47 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0016   user+syst:        0.01s (syst:        0.00s, elaps:        0.00s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt152
+# ----------------------------------------------------------------------------------------------
+# Commande #0017 de 01_exemple.comm.changed.py, ligne 152
+SIEF_INF = POST_CHAMP(EXTR_COQUE=_F(NIVE_COUCHE='INF',
+                                    NOM_CHAM='SIEF_ELNO',
+                                    NUME_COUCHE=1),
+                      RESULTAT=RESU)
+
+# Résultat commande #0017 (POST_CHAMP): SIEF_INF ('<0000000e>') de type <NonLinearResult>
+# Dépend de :
+# - RESU ('<0000000c>') de type <NonLinearResult>
+# Mémoire (Mo) :   774.24 /   770.47 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0017   user+syst:        0.00s (syst:        0.00s, elaps:        0.01s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt173
+# ----------------------------------------------------------------------------------------------
+# Commande #0018 de 01_exemple.comm.changed.py, ligne 173
+IMPR_RESU(FORMAT='RESULTAT',
+          INFO=1,
+          PROC0='OUI',
+          RESU=_F(FORMAT_R='1PE21.14',
+                  FORM_TABL='NON',
+                  IMPR_COOR='NON',
+                  NOM_CHAM='SIEF_ELNO',
+                  NOM_CMP=('SIXX', 'SIYY', 'SIZZ', 'SIXY', 'SIXZ', 'SIYZ'),
+                  RESULTAT=SIEF_SUP,
+                  TOUT_ORDRE='OUI'),
+          UNITE=8)
+
+# Mémoire (Mo) :   774.24 /   770.47 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0018   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt183
+# ----------------------------------------------------------------------------------------------
+# Commande #0019 de 01_exemple.comm.changed.py, ligne 183
+IMPR_RESU(FORMAT='RESULTAT',
+          INFO=1,
+          PROC0='OUI',
+          RESU=_F(FORMAT_R='1PE21.14',
+                  FORM_TABL='NON',
+                  IMPR_COOR='NON',
+                  NOM_CHAM='SIEF_ELNO',
+                  NOM_CMP=('SIXX', 'SIYY', 'SIZZ', 'SIXY', 'SIXZ', 'SIYZ'),
+                  RESULTAT=SIEF_INF,
+                  TOUT_ORDRE='OUI'),
+          UNITE=8)
+
+# Mémoire (Mo) :   774.24 /   770.47 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0019   user+syst:        0.01s (syst:        0.00s, elaps:        0.00s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt195
+# ----------------------------------------------------------------------------------------------
+# Commande #0020 de 01_exemple.comm.changed.py, ligne 195
+IMPR_RESU(FICHIER_UNIQUE='NON',
+          FORMAT='MED',
+          INFO=1,
+          PROC0='OUI',
+          RESU=(_F(IMPR_NOM_VARI='OUI',
+                   INFO_MAILLAGE='NON',
+                   NOM_CHAM='SIEF_ELNO',
+                   NOM_CHAM_MED='SIEF_SUPSIEF_ELNO',
+                   RESULTAT=SIEF_SUP),
+                _F(IMPR_NOM_VARI='OUI',
+                   INFO_MAILLAGE='NON',
+                   NOM_CHAM='SIEF_ELNO',
+                   NOM_CHAM_MED='SIEF_INFSIEF_ELNO',
+                   RESULTAT=SIEF_INF),
+                _F(IMPR_NOM_VARI='OUI',
+                   INFO_MAILLAGE='NON',
+                   NOM_CHAM='EPSI_ELNO',
+                   NOM_CHAM_MED='RESU____EPSI_ELNO',
+                   RESULTAT=RESU),
+                _F(IMPR_NOM_VARI='OUI',
+                   INFO_MAILLAGE='NON',
+                   NOM_CHAM='DEPL',
+                   NOM_CHAM_MED='RESU____DEPL',
+                   RESULTAT=RESU)),
+          UNITE=80,
+          VERSION_MED='3.3.1')
+
+Création du fichier au format MED 3.3.1.
+
+# Mémoire (Mo) :   774.24 /   770.47 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0020   user+syst:        0.02s (syst:        0.00s, elaps:        0.02s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt213
+# ----------------------------------------------------------------------------------------------
+# Commande #0021 de 01_exemple.comm.changed.py, ligne 213
+IMPR_CONCEPT(CONCEPT=_F(CARA_ELEM=Elem,
+                        MODELE=Modell,
+                        REPERE_LOCAL='ELEM'),
+             FORMAT='MED',
+             INFO=1,
+             UNITE=80,
+             VERSION_MED='3.3.1')
+
+  
+  
+IMPRESSION D'UN CHAMP DE CONCEPT : Caracteristiques geom. des coques                                               
+IMPRESSION D'UN CHAMP DE CONCEPT : Caracteristiques geom. des coques                                               
+NOM DU CHAMP : 00000005_CARCOQUE  
+NOM DU CHAMP : 00000005_CARCOQUE  
+#2      Calculs elementaires et assemblages               CPU (USER+SYST/SYST/ELAPS):      0.00      0.00      0.00
+# Mémoire (Mo) :   774.24 /   770.47 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0021   user+syst:        0.01s (syst:        0.01s, elaps:        0.01s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt218
+# ----------------------------------------------------------------------------------------------
+# Commande #0022 de 01_exemple.comm.changed.py, ligne 218
+IMPR_RESU(FORMAT='ASTER',
+          INFO=1,
+          PROC0='OUI',
+          RESU=_F(FORMAT_R='1PE21.14',
+                  MAILLAGE=BGruppe),
+          UNITE=30)
+
+# Mémoire (Mo) :   774.24 /   770.47 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0022   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt219
+# ----------------------------------------------------------------------------------------------
+# Commande #0023 de 01_exemple.comm.changed.py, ligne 219
+IMPR_RESU(FICHIER_UNIQUE='NON',
+          FORMAT='MED',
+          INFO=1,
+          PROC0='OUI',
+          RESU=_F(IMPR_NOM_VARI='OUI',
+                  INFO_MAILLAGE='NON',
+                  MAILLAGE=BGruppe),
+          UNITE=31,
+          VERSION_MED='3.3.1')
+
+Création du fichier au format MED 3.3.1.
+
+# Mémoire (Mo) :   774.24 /   770.47 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0023   user+syst:        0.00s (syst:        0.00s, elaps:        0.01s)
+# ----------------------------------------------------------------------------------------------
+
+.. _stg1_txt76
+# ----------------------------------------------------------------------------------------------
+# Commande #0024 de /opt/spack/opt/spack/linux-zen2/code-aster-17.4
+0-ecm2bfgr5obydotnlte6xilvggppqnap/lib64/aster/code_aster/CodeCommands/fin.py, ligne 76
+FIN(INFO_RESU='NON',
+    RETASSAGE='NON')
+
+No database in results, objects not saved on processor #0
+
+ ╔════════════════════════════════════════════════════════════════════════════════════════════════╗
+ ║ <I> <CATAMESS_89>                                                                              ║
+ ║                                                                                                ║
+ ║ Liste des alarmes émises lors de l'exécution du calcul.                                        ║
+ ║                                                                                                ║
+ ║     Les alarmes que vous avez choisies d'ignorer sont précédées de (*).                        ║
+ ║     Nombre d'occurrences pour chacune des alarmes :                                            ║
+ ║            aucune alarme                                                                       ║
+ ╚════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+<I> <FIN> ARRET NORMAL DANS "FIN" PAR APPEL A "JEFINI".
+  
+ <I> <FIN> MEMOIRE JEVEUX MINIMALE REQUISE POUR L'EXECUTION :                     198.48 Mo
+ <I> <FIN> MEMOIRE JEVEUX OPTIMALE REQUISE POUR L'EXECUTION :                     207.61 Mo
+ <I> <FIN> MAXIMUM DE MEMOIRE UTILISEE PAR LE PROCESSUS LORS DE L'EXECUTION :     779.17 Mo
+  
+ <I>       FERMETURE DES BASES EFFECTUEE
+  
+   STATISTIQUES CONCERNANT L'ALLOCATION DYNAMIQUE :
+     TAILLE CUMULEE MAXIMUM            :                  208  Mo.
+     TAILLE CUMULEE LIBEREE            :                    7  Mo.
+     NOMBRE TOTAL D'ALLOCATIONS        :                42470
+     NOMBRE TOTAL DE LIBERATIONS       :                41736
+     APPELS AU MECANISME DE LIBERATION :                    0
+     TAILLE MEMOIRE CUMULEE RECUPEREE  :                    0  Mo.
+     VOLUME DES LECTURES               :                    0  Mo.
+     VOLUME DES ECRITURES              :                    0  Mo.
+  
+   MEMOIRE JEVEUX MINIMALE REQUISE POUR L'EXECUTION :     198.48 Mo
+     - IMPOSE DE NOMBREUX ACCES DISQUE
+     - RALENTIT LA VITESSE D'EXECUTION
+   MEMOIRE JEVEUX OPTIMALE REQUISE POUR L'EXECUTION :     207.61 Mo
+     - LIMITE LES ACCES DISQUE
+     - AMELIORE LA VITESSE D'EXECUTION
+   MAXIMUM DE MEMOIRE UTILISEE PAR LE PROCESSUS     :     779.17 Mo
+     - COMPREND LA MEMOIRE CONSOMMEE PAR  JEVEUX, 
+       LE SUPERVISEUR PYTHON, LES LIBRAIRIES EXTERNES
+  
+ <I>       FIN D'EXECUTION LE : LU-15-JUIN-2026 14:06:44
+INFO './glob.1' deleted
+Deleting './glob.2': No such file or directory
+INFO './vola.1' deleted
+Deleting './vola.2': No such file or directory
+
+ ********************************************************************************
+ * COMMAND                  :       USER :     SYSTEM :   USER+SYS :    ELAPSED *
+ ********************************************************************************
+ * DEBUT                    :       0.02 :       0.29 :       0.31 :       0.30 *
+ * LIRE_MAILLAGE            :       0.01 :       0.00 :       0.01 :       0.02 *
+ * LIRE_MAILLAGE            :       0.01 :       0.00 :       0.01 :       0.00 *
+ * ASSE_MAILLAGE            :       0.00 :       0.00 :       0.00 :       0.00 *
+ * AFFE_MODELE              :       0.02 :       0.00 :       0.02 :       0.03 *
+ * AFFE_CARA_ELEM           :       0.00 :       0.00 :       0.00 :       0.00 *
+ * DEFI_MATERIAU            :       0.03 :       0.00 :       0.03 :       0.04 *
+ * AFFE_MATERIAU            :       0.03 :       0.00 :       0.03 :       0.04 *
+ * AFFE_CHAR_MECA           :       0.00 :       0.00 :       0.00 :       0.00 *
+ * DEFI_GROUP               :       0.00 :       0.00 :       0.00 :       0.00 *
+ * DEFI_FONCTION            :       0.01 :       0.00 :       0.01 :       0.01 *
+ * DEFI_LIST_REEL           :       0.00 :       0.00 :       0.00 :       0.00 *
+ * DEFI_LIST_INST           :       0.00 :       0.00 :       0.00 :       0.01 *
+ * STAT_NON_LINE            :       0.05 :       0.00 :       0.05 :       0.04 *
+ * CALC_CHAMP               :       0.01 :       0.00 :       0.01 :       0.02 *
+ * POST_CHAMP               :       0.01 :       0.00 :       0.01 :       0.00 *
+ * POST_CHAMP               :       0.00 :       0.00 :       0.00 :       0.01 *
+ * IMPR_RESU                :       0.01 :       0.00 :       0.01 :       0.01 *
+ * IMPR_RESU                :       0.01 :       0.00 :       0.01 :       0.00 *
+ * IMPR_RESU                :       0.02 :       0.00 :       0.02 :       0.02 *
+ * IMPR_CONCEPT             :       0.01 :       0.01 :       0.02 :       0.01 *
+ * IMPR_RESU                :       0.00 :       0.00 :       0.00 :       0.00 *
+ * IMPR_RESU                :       0.00 :       0.00 :       0.00 :       0.01 *
+ * FIN                      :       0.04 :       0.00 :       0.04 :       0.05 *
+ *  . check syntax          :       0.02 :       0.00 :       0.02 :       0.01 *
+ *  . fortran               :       0.17 :       0.29 :       0.46 :       0.47 *
+ *  . cleanup               :       0.06 :       0.00 :       0.06 :       0.07 *
+ ********************************************************************************
+ * TOTAL_JOB                :       0.36 :       0.31 :       0.67 :       0.67 *
+ ********************************************************************************
+
+# Mémoire (Mo) :   779.17 /   779.17 /   207.61 /   198.48 (VmPeak / VmSize / Optimum / Minimum)
+# Fin commande #0024   user+syst:        0.04s (syst:        0.00s, elaps:        0.05s)
+# ----------------------------------------------------------------------------------------------
+End of the Code_Aster execution
+Code_Aster MPI exits normally
+Exited
+
+EXECUTION_CODE_ASTER_EXIT_11=0
+
+
+
+------------------------------------------------------------
+--- DIAGNOSTIC JOB : OK
+------------------------------------------------------------
+

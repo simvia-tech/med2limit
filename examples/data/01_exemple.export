@@ -1,0 +1,20 @@
+P memory_limit 80000
+P time_limit 300000
+P ncpus 1
+P mpi_nbcpu 1
+P mpi_nbnoeud 1
+
+# Input
+F comm 01_exemple.comm D  1
+F mmed 01_Shell1.med D  20
+F mmed 01_Shell2.med D  21
+
+# Output
+F mess 01_exemple.mess R  6
+F mail 01_exemple.mail R  30
+F mmed 01_exemple.med R  31
+F resu 01_exemple.resu R  8
+F rmed 01_exemple.rmed R  80
+
+# Optional shell orientation file
+#F rmed 01_carcoc.rmed R  81

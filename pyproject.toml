@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "med2limit"
+version = "0.10.0"
+description = "Convert Code_Aster MED/RMED simulation files to LIMIT .linp / .lui input format"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Proprietary" }
+authors = [
+    { name = "Dorian Ezzar" },
+]
+keywords = ["med", "rmed", "code_aster", "limit", "fea", "fatigue"]
+
+dependencies = [
+    "medcoupling",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+
+[project.scripts]
+med2limit = "med2limit.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["med2limit*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

@@ -1,0 +1,208 @@
+DEBUT(LANG='EN',);
+
+Shell1   = LIRE_MAILLAGE(UNITE=20,
+                         FORMAT='MED', INFO=2);
+Shell2   = LIRE_MAILLAGE(UNITE=21,
+                         FORMAT='MED',INFO=2);
+
+BGruppe  = ASSE_MAILLAGE(MAILLAGE_1=Shell1,
+                         MAILLAGE_2=Shell2,
+                         OPERATION='SUPERPOSE',);
+
+del Shell1,Shell2 # FYI: This really saves RAM for large models with a lot of seperate mesh
+
+Modell = AFFE_MODELE(MAILLAGE=BGruppe,
+                     AFFE=(_F(TOUT='OUI',
+                             PHENOMENE='MECANIQUE',
+                             MODELISATION='DKT',),),),;
+
+Elem = AFFE_CARA_ELEM(MODELE=Modell,
+                      COQUE=(_F(GROUP_MA = 'Shell1',
+                                EPAIS =3.0,
+                                VECTEUR=(1.0,0.0,0.0),
+                                ),_F(GROUP_MA ='Shell2',
+                                EPAIS =5.0,
+                                VECTEUR=(0.0,0.0,1.0),
+                                )),
+                        ); 
+
+Steel = DEFI_MATERIAU(ELAS=_F(E=210000.0,
+                              NU=0.3,
+                              RHO=7.85e-09,),);
+
+Prop = AFFE_MATERIAU(MAILLAGE=BGruppe,
+                     AFFE=(_F(TOUT='OUI',
+                             MATER=Steel,),),);
+
+Meca = AFFE_CHAR_MECA(MODELE=Modell,
+                      DDL_IMPO=(_F(GROUP_MA=('Fix1','Fix2',),
+                                   DX=0.0,
+                                   DY=0.0,
+                                   DZ=0.0,),),
+                      LIAISON_MAIL=(_F(GROUP_MA_MAIT='Shell1',
+                                       GROUP_MA_ESCL='Weld',
+                                       TYPE_RACCORD='COQUE',
+                                       DISTANCE_MAX=10.0,
+                                       DISTANCE_ALARME=11.0,),),
+                      PRES_REP=(_F(GROUP_MA=('Shell1','Shell2',),
+                                   PRES=0.35),),);
+# Créer le node group à partir du group_ma
+BGruppe = DEFI_GROUP(reuse=BGruppe,
+                     MAILLAGE=BGruppe,
+                     CREA_GROUP_NO=_F(GROUP_MA='Weld',
+                                      NOM='WeldNO',),)
+
+AmpInit = DEFI_FONCTION(NOM_PARA='INST', 
+                        VALE=( 0,0,
+                               1,1,), 
+                         PROL_DROITE='LINEAIRE',
+                         PROL_GAUCHE='LINEAIRE',);
+
+ListReel=DEFI_LIST_REEL(DEBUT=0,
+                        INTERVALLE=_F(JUSQU_A=1,
+                                      NOMBRE=1,),);
+
+ListInst=DEFI_LIST_INST(DEFI_LIST=_F(LIST_INST=ListReel,),   
+                            ECHEC=_F(SUBD_NIVEAU=40,
+                                     SUBD_PAS_MINI=0.0,
+                                     SUBD_PAS=4,
+                                     SUBD_METHODE='MANUEL',
+                                     ACTION='DECOUPE',
+                                     EVENEMENT='ERREUR',),);
+                                     
+RESU=STAT_NON_LINE(MODELE=Modell,
+                   CHAM_MATER=Prop,
+                   CARA_ELEM=Elem,
+                   EXCIT=(_F(CHARGE=Meca, FONC_MULT=AmpInit),),
+                   COMPORTEMENT=_F(RELATION='ELAS',),
+                   INCREMENT=_F(LIST_INST=ListInst,),
+                   CONVERGENCE=_F(RESI_GLOB_RELA=1e-4,
+                                  ITER_GLOB_MAXI=20,),
+                   INFO=1,);
+                   
+RESU=CALC_CHAMP(reuse =RESU,
+                MODELE=Modell,
+                CHAM_MATER=Prop,
+                RESULTAT=RESU,
+            #    FORCE=('REAC_NODA','FORC_NODA',),
+                CONTRAINTE=('SIEF_ELNO',),
+                CRITERES=('SIEQ_ELNO',),
+                DEFORMATION=('EPSI_ELNO',),);
+
+# SUP=>top Layer of a shell
+#SIEQ_SUP=POST_CHAMP(RESULTAT=RESU,
+#                    EXTR_COQUE=_F(NOM_CHAM='SIEQ_ELNO',
+#                                  NUME_COUCHE=1,
+#                                  NIVE_COUCHE='SUP',),);
+#
+SIEF_SUP=POST_CHAMP(RESULTAT=RESU,
+                    EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
+                                  NUME_COUCHE=1,
+                                  NIVE_COUCHE='SUP',),);
+
+#SIEQ_SUP=CALC_CHAMP(reuse=SIEQ_SUP,
+#                    RESULTAT=SIEQ_SUP,
+#                    CRITERES='SIEQ_NOEU',);
+#
+#SIEF_SUP=CALC_CHAMP(reuse=SIEF_SUP,
+#                    RESULTAT=SIEF_SUP,
+#                    CONTRAINTE='SIEF_NOEU',);
+## ===============================================================================
+
+## Berechnen der Spannungen in der Mittelschicht des Schalenelements
+## MOY=>Centre Layer of a shell
+#SIEQ_MOY=POST_CHAMP(RESULTAT=RESU,
+#                    EXTR_COQUE=_F(NOM_CHAM='SIEQ_ELNO',
+#                                  NUME_COUCHE=1,
+#                                  NIVE_COUCHE='MOY',),);
+#
+#SIEF_MOY=POST_CHAMP(RESULTAT=RESU,
+#                    EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
+#                                  NUME_COUCHE=1,
+#                                  NIVE_COUCHE='MOY',),);
+#
+#SIEQ_MOY=CALC_CHAMP(reuse=SIEQ_MOY,
+#                    RESULTAT=SIEQ_MOY,
+#                    CRITERES='SIEQ_NOEU',);
+#
+#SIEF_MOY=CALC_CHAMP(reuse=SIEF_MOY,
+#                    RESULTAT=SIEF_MOY,
+#                    CONTRAINTE='SIEF_NOEU',);
+## ===============================================================================
+
+## Berechnen der Spannungen in der Unterseite des Schalenelements
+## INF=>Bottom Layer of a shell
+#SIEQ_INF=POST_CHAMP(RESULTAT=RESU,
+#                    EXTR_COQUE=_F(NOM_CHAM='SIEQ_ELNO',
+#                                  NUME_COUCHE=1,
+#                                  NIVE_COUCHE='INF',),);
+#
+SIEF_INF=POST_CHAMP(RESULTAT=RESU,
+                    EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
+                                  NUME_COUCHE=1,
+                                  NIVE_COUCHE='INF',),);
+
+#SIEQ_INF=CALC_CHAMP(reuse=SIEQ_INF,
+#                    RESULTAT=SIEQ_INF,
+#                    CRITERES='SIEQ_NOEU',);
+#
+#SIEF_INF=CALC_CHAMP(reuse=SIEF_INF,
+#                    RESULTAT=SIEF_INF,
+#                    CONTRAINTE='SIEF_NOEU',);
+## ===============================================================================
+
+
+
+# ===============================================================================
+# TABLE DE VERIFICATION - Comparaison avec MEDCoupling
+# ===============================================================================
+
+# Sortie texte SIEF_ELNO SUP (face supérieure)
+IMPR_RESU(FORMAT='RESULTAT',
+          UNITE=8,
+          RESU=(
+              _F(RESULTAT=SIEF_SUP,
+                 NOM_CHAM='SIEF_ELNO',
+                 NOM_CMP=('SIXX', 'SIYY', 'SIZZ', 'SIXY', 'SIXZ', 'SIYZ',),
+                 TOUT_ORDRE='OUI',),
+          ))
+
+# Sortie texte SIEF_ELNO INF (face inférieure)
+IMPR_RESU(FORMAT='RESULTAT',
+          UNITE=8,
+          RESU=(
+              _F(RESULTAT=SIEF_INF,
+                 NOM_CHAM='SIEF_ELNO',
+                 NOM_CMP=('SIXX', 'SIYY', 'SIZZ', 'SIXY', 'SIXZ', 'SIYZ',),
+                 TOUT_ORDRE='OUI',),
+          ))
+
+
+
+
+IMPR_RESU(FORMAT='MED',
+          UNITE=80,
+          RESU=(
+              # Export TOP (peau supérieure)
+              _F(RESULTAT=SIEF_SUP,
+                 NOM_CHAM='SIEF_ELNO'),
+              
+              # Export BOTTOM (peau inférieure)
+              _F(RESULTAT=SIEF_INF,
+                 NOM_CHAM='SIEF_ELNO'),
+
+              _F(RESULTAT=RESU,
+                 NOM_CHAM='EPSI_ELNO'),                               
+              
+              # Export déplacements
+              _F(RESULTAT=RESU,
+                 NOM_CHAM='DEPL'),
+          ))
+IMPR_CONCEPT(FORMAT='MED',
+             UNITE=80,
+             CONCEPT=(_F(CARA_ELEM=Elem,
+                         REPERE_LOCAL='ELEM',
+                         MODELE=Modell,),),)
+IMPR_RESU(FORMAT="ASTER", RESU=_F(MAILLAGE=BGruppe), UNITE=30)
+IMPR_RESU(FORMAT="MED", RESU=_F(MAILLAGE=BGruppe), UNITE=31)
+FIN();

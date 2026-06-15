@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+.mon_env/
+mon_env/
+env/
+
+# Vs Code Aster
+*.obj
+
+# Build artifacts
+build/
+dist/
+*.whl
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Example/test data (large binary files)
+#examples/data/*.rmed
+#examples/data/*.med
+#examples/data/*.linp
+#examples/data/*.lui
+#!examples/data/README.md
+#!examples/data/exemple_01.rmed
+#!examples/data/carcoc.rmed
+
+# Ruff / mypy cache
+.ruff_cache/
+.mypy_cache/
