@@ -2,4 +2,4 @@
 *.rmed filter=lfs diff=lfs merge=lfs -text
 *.resu filter=lfs diff=lfs merge=lfs -text
 *.mail filter=lfs diff=lfs merge=lfs -text
-*.mail filter=lfs diff=lfs merge=lfs -text
+*.mess filter=lfs diff=lfs merge=lfs -text

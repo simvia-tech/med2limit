@@ -27,8 +27,8 @@ dist/
 # Example/test data (large binary files)
 #examples/data/*.rmed
 #examples/data/*.med
-#examples/data/*.linp
-#examples/data/*.lui
+*.linp
+*.lui
 #!examples/data/README.md
 #!examples/data/exemple_01.rmed
 #!examples/data/carcoc.rmed
