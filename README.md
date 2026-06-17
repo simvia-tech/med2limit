@@ -18,8 +18,7 @@ MEDCoupling with pip into a virtual python environnement (venv):
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -e .                     # editable install of med2limit
-pip install -e ".[dev]"              # with pytest, ruff, black
+pip install git+https://github.com/simvia-tech/med2limit.git@dev
 ```
 
 ## Usage
@@ -114,3 +113,8 @@ pytest tests/test_element_types.py   # one module
 
 - Quadratic solids (C3D10, C3D15, C3D20) — node ordering not yet validated in LIMIT
 - Shell elsets with mixed thicknesses use the most-frequent value (with warning)
+
+## Acknowledgments
+
+Special thanks to Tobias and Nikolaus for their feedback as early adopters
+and their patience during the iterative development of the converter.
