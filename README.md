@@ -40,11 +40,11 @@ med2limit 01_exemple.rmed output.linp output.lui 01_carcoc.rmed --groups "Shell1
 ```
 # 01_exemple
 <img src="./examples/images/01_exemple_LIMIT.png" width="50%">
-Code_aster Shell-Shell geometry succefully imported in LIMIT Software
+Code_aster Shell-Shell geometry successfully imported in LIMIT Software
 
 # 02_exemple
 <img src="./examples/images/02_exemple_LIMIT.png" width="50%">
-Code_aster Solid-Shell geometry succefully imported in LIMIT Software
+Code_aster Solid-Shell geometry successfully imported in LIMIT Software
 
 ### Python API
 
