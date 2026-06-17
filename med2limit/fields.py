@@ -42,10 +42,17 @@ class FieldExtractor:
             "SIEF_ELNO", exclude=("INF", "SUP")
         )
 
-        if stress_generic_field is not None:
-            self.stress_mode = "generic"
-        elif stress_inf_field is not None and stress_sup_field is not None:
+        # Track what's available — they're not mutually exclusive anymore
+        self.has_shell_stress = (stress_inf_field is not None and stress_sup_field is not None)
+        self.has_generic_stress = stress_generic_field is not None
+
+        # Legacy flag for backward compat (e.g. logging)
+        if self.has_shell_stress and self.has_generic_stress:
+            self.stress_mode = "mixed"
+        elif self.has_shell_stress:
             self.stress_mode = "shell_top_bottom"
+        elif self.has_generic_stress:
+            self.stress_mode = "generic"
         else:
             self.stress_mode = None
 
@@ -75,16 +82,18 @@ class FieldExtractor:
             )
         except Exception as e:
             print(f"  WARNING: TS={it}: could not extract displacement: {e}")
-
-        # Stress
-        if self.stress_mode == "generic" and gen_field is not None:
+    
+        # Generic stress (for solids) — independent of shell stress
+        if self.has_generic_stress:
             try:
                 self.stress_generic_raw_ts[it] = (
                     gen_field.getTimeStepAtPos(it).getUndergroundDataArray().toNumPyArray()
                 )
             except Exception as e:
                 print(f"  WARNING: TS={it}: could not extract generic stress: {e}")
-        elif self.stress_mode == "shell_top_bottom":
+    
+        # Shell top/bottom (for shells) — independent of generic stress
+        if self.has_shell_stress:
             try:
                 self.stress_inf_raw_ts[it] = (
                     inf_field.getTimeStepAtPos(it).getUndergroundDataArray().toNumPyArray()
