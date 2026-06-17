@@ -38,6 +38,13 @@ With separate orientation file:
 ```bash
 med2limit 01_exemple.rmed output.linp output.lui 01_carcoc.rmed --groups "Shell1,Shell2" --nsets "WeldNo"
 ```
+# 01_exemple
+<img src="./examples/images/01_exemple_LIMIT.png" width="50%">
+Code_aster Shell-Shell geometry succefully imported in LIMIT Software
+
+# 02_exemple
+<img src="./examples/images/02_exemple_LIMIT.png" width="50%">
+Code_aster Solid-Shell geometry succefully imported in LIMIT Software
 
 ### Python API
 
