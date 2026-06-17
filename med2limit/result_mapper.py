@@ -38,16 +38,16 @@ class ResultMapper:
         self.stress_by_element = {}
 
     def map_timestep(self, it: int):
-        """Map one time step. Containers are reset before filling."""
         self.disp_data = {}
         self.stress_top = {}
         self.stress_bottom = {}
         self.stress_by_element = {}
 
         self._map_displacement(it)
-        if self.fields.stress_mode == "generic":
+        # Both mappings run independently — each only fires if its data was extracted
+        if self.fields.has_generic_stress:
             self._map_generic_stress(it)
-        elif self.fields.stress_mode == "shell_top_bottom":
+        if self.fields.has_shell_stress:
             self._map_shell_stress(it)
 
     def _map_displacement(self, it):
@@ -70,17 +70,21 @@ class ResultMapper:
         for elem_id in sorted(self.active_elem_ids):
             elem_type = self.all_elements[elem_id]["type"]
             conn = self.all_elements[elem_id]["connectivity"]
-            if not is_result_carrying(elem_type):
-                continue
             n = len(conn)
-            end = idx + n
-            if end <= len(raw):
-                # Keep MED/local node order — LIMIT expects element-local ordering for solids
-                self.stress_by_element[elem_id] = [raw[j][:6] for j in range(idx, end)]
-            else:
-                print(f"  WARNING: TS={it}: not enough generic stress tuples for elem {elem_id}")
-                self.stress_by_element[elem_id] = []
-            idx = end
+            # The generic field has ELNO tuples for EVERY result-carrying element
+            # (shells + solids), but we only USE them for solids — shells get
+            # their stress from SIEF_SUP/INF instead.
+            if is_solid(elem_type):
+                end = idx + n
+                if end <= len(raw):
+                    self.stress_by_element[elem_id] = [raw[j][:6] for j in range(idx, end)]
+                else:
+                    print(f"  WARNING: TS={it}: not enough generic stress tuples for elem {elem_id}")
+                    self.stress_by_element[elem_id] = []
+            # Advance the cursor for ALL result-carrying elements, otherwise the
+            # offset for the next solid would be wrong
+            if is_result_carrying(elem_type):
+                idx += n
 
     def _map_shell_stress(self, it):
         raw_inf = self.fields.stress_inf_raw_ts[it]
