@@ -1,0 +1,16 @@
+P memory_limit 80000
+P time_limit 300000
+P ncpus 1
+P mpi_nbcpu 1
+P mpi_nbnoeud 1
+
+# Input
+F comm 02_exemple.comm D  1
+F mmed cube_plate.med D  20
+
+# Output
+F mess 02_exemple.mess R  6
+F mail 02_exemple.mail R  30
+F mmed 02_exemple.med R  31
+F resu 02_exemple.resu R  8
+F rmed 02_exemple.rmed R  80

@@ -1,0 +1,179 @@
+DEBUT(LANG='EN',);
+
+# ============================================================================
+# Read the mesh produced by generate_cube_plate.py
+# - Cube  : HEXA8 (3D)
+# - Plate : QUAD4 (DKT shell)
+# - Weld  : edge of the plate at the cube interface (1D)
+# - Fix   : opposite face of the cube (clamped BC)
+# ============================================================================
+
+mesh = LIRE_MAILLAGE(UNITE=20,
+                     FORMAT='MED', INFO=2)
+
+
+# ============================================================================
+# Mixed model: 3D solids for the cube, DKT shell for the plate
+# ============================================================================
+
+Modell = AFFE_MODELE(MAILLAGE=mesh,
+                     AFFE=(_F(GROUP_MA='Cube',
+                              PHENOMENE='MECANIQUE',
+                              MODELISATION='3D',),
+                           _F(GROUP_MA='Plate',
+                              PHENOMENE='MECANIQUE',
+                              MODELISATION='DKT',),),)
+
+
+# ============================================================================
+# Shell properties — only for the plate
+# EPAIS=3.0 mm, local axis VECTEUR=(1,0,0) (along X, in the plate plane)
+# ============================================================================
+
+Elem = AFFE_CARA_ELEM(MODELE=Modell,
+                      COQUE=(_F(GROUP_MA='Plate',
+                                EPAIS=3.0,
+                                VECTEUR=(1.0, 0.0, 0.0),),),)
+
+
+# ============================================================================
+# Material — same steel for cube and plate
+# ============================================================================
+
+Steel = DEFI_MATERIAU(ELAS=_F(E=210000.0,
+                              NU=0.3,
+                              RHO=7.85e-09,),)
+
+Prop = AFFE_MATERIAU(MAILLAGE=mesh,
+                     AFFE=_F(TOUT='OUI',
+                             MATER=Steel,),)
+
+
+# ============================================================================
+# Shell normal field — required by LIAISON_MAIL TYPE_RACCORD='COQUE_MASSIF'
+# Computed on the plate surface group
+# ============================================================================
+
+chnor = CREA_CHAMP(TYPE_CHAM='NOEU_GEOM_R',
+                   OPERATION='NORMALE',
+                   MODELE=Modell,
+                   GROUP_MA='Plate',
+                   INFO=1,)
+
+
+# ============================================================================
+# Boundary conditions
+# - Fix       : clamped on the cube face y=0
+# - PRES_REP  : 0.35 MPa pressure on the plate
+# - LIAISON_MAIL COQUE_MASSIF : couple the plate edge 'Weld' to the cube volume
+# ============================================================================
+
+Meca = AFFE_CHAR_MECA(MODELE=Modell,
+                      DDL_IMPO=(_F(GROUP_MA='Fix',
+                                   DX=0.0, DY=0.0, DZ=0.0,),
+                                _F(GROUP_MA='Tip',
+                                   DZ=-0.05,),),
+                      LIAISON_MAIL=_F(TYPE_RACCORD='COQUE_MASSIF',
+                                      GROUP_MA_MAIT='Cube',
+                                      GROUP_MA_ESCL='Weld',
+                                      CHAM_NORMALE=chnor,
+                                      EPAIS=3.0,),)
+
+
+# ============================================================================
+# Time stepping
+# ============================================================================
+
+AmpInit = DEFI_FONCTION(NOM_PARA='INST',
+                        VALE=(0, 0, 1, 1,),
+                        PROL_DROITE='LINEAIRE',
+                        PROL_GAUCHE='LINEAIRE',)
+
+ListReel = DEFI_LIST_REEL(DEBUT=0,
+                          INTERVALLE=_F(JUSQU_A=1, NOMBRE=1,),)
+
+ListInst = DEFI_LIST_INST(DEFI_LIST=_F(LIST_INST=ListReel,),
+                          ECHEC=_F(SUBD_NIVEAU=40,
+                                   SUBD_PAS_MINI=0.0,
+                                   SUBD_PAS=4,
+                                   SUBD_METHODE='MANUEL',
+                                   ACTION='DECOUPE',
+                                   EVENEMENT='ERREUR',),)
+
+
+# ============================================================================
+# Non-linear static analysis
+# ============================================================================
+
+RESU = STAT_NON_LINE(MODELE=Modell,
+                     CHAM_MATER=Prop,
+                     CARA_ELEM=Elem,
+                     EXCIT=_F(CHARGE=Meca, FONC_MULT=AmpInit,),
+                     COMPORTEMENT=_F(RELATION='ELAS',),
+                     INCREMENT=_F(LIST_INST=ListInst,),
+                     CONVERGENCE=_F(RESI_GLOB_RELA=1e-4,
+                                    ITER_GLOB_MAXI=20,),
+                     INFO=1,)
+
+
+# ============================================================================
+# Post-processing — stress fields
+# Note: SIEF_ELNO is the generic stress field that works for both 3D and DKT.
+# For the shell we also extract SUP/INF layers via POST_CHAMP.
+# ============================================================================
+
+RESU = CALC_CHAMP(reuse=RESU,
+                  MODELE=Modell,
+                  CHAM_MATER=Prop,
+                  RESULTAT=RESU,
+                  CONTRAINTE=('SIEF_ELNO',),
+                  DEFORMATION=('EPSI_ELNO',),)
+
+# Shell layers (only meaningful for the plate)
+SIEF_SUP = POST_CHAMP(RESULTAT=RESU,
+                      EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
+                                    NUME_COUCHE=1,
+                                    NIVE_COUCHE='SUP',),)
+
+SIEF_INF = POST_CHAMP(RESULTAT=RESU,
+                      EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
+                                    NUME_COUCHE=1,
+                                    NIVE_COUCHE='INF',),)
+
+
+# ============================================================================
+# Create a node group from the weld element group — handy for med2limit
+# ============================================================================
+
+mesh = DEFI_GROUP(reuse=mesh,
+                  MAILLAGE=mesh,
+                  CREA_GROUP_NO=_F(GROUP_MA='Weld',
+                                   NOM='WeldNO',),)
+
+
+# ============================================================================
+# Export everything for med2limit
+# UNITE=80 carries: DEPL, SIEF_ELNO (generic), SIEF_SUP/INF (shell), REPLO, CARCOQUE
+# ============================================================================
+
+IMPR_RESU(FORMAT='MED',
+          UNITE=80,
+          RESU=(_F(RESULTAT=SIEF_SUP, NOM_CHAM='SIEF_ELNO',),
+                _F(RESULTAT=SIEF_INF, NOM_CHAM='SIEF_ELNO',),
+                _F(RESULTAT=RESU, NOM_CHAM='EPSI_ELNO',),
+                _F(RESULTAT=RESU, NOM_CHAM='SIEF_ELNO',),
+                _F(RESULTAT=RESU, NOM_CHAM='DEPL',),))
+
+# Embed shell orientation (REPLO_1/2) and section properties (CARCOQUE)
+# in the same MED file
+IMPR_CONCEPT(FORMAT='MED',
+             UNITE=80,
+             CONCEPT=_F(CARA_ELEM=Elem,
+                        REPERE_LOCAL='ELEM',
+                        MODELE=Modell,),)
+
+
+IMPR_RESU(FORMAT='ASTER', RESU=_F(MAILLAGE=mesh,), UNITE=30)
+IMPR_RESU(FORMAT='MED', RESU=_F(MAILLAGE=mesh,), UNITE=31)
+
+FIN()
