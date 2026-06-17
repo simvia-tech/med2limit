@@ -44,7 +44,19 @@ def test_reorder_c3d8():
     # Permutation: [0, 3, 2, 1, 4, 7, 6, 5]
     assert reordered == [10, 40, 30, 20, 50, 80, 70, 60]
 
-
+def test_shell_types_includes_quads():
+    """S4 quads must be recognized as shells, not just S3 triangles."""
+    from med2limit.orientation import build_active_shell_signatures
+    
+    nodes = {1: (0.,0.,0.), 2: (1.,0.,0.), 3: (1.,1.,0.), 4: (0.,1.,0.)}
+    elements = {
+        1: {"type": "S4", "connectivity": [1, 2, 3, 4]},
+        2: {"type": "C3D8", "connectivity": [1, 2, 3, 4, 1, 2, 3, 4]},  # ignoré
+    }
+    sigs = build_active_shell_signatures(nodes, elements)
+    assert 1 in sigs        # le quad est détecté
+    assert 2 not in sigs    # le solide est ignoré
+    
 def test_reorder_c3d6():
     conn = [1, 2, 3, 4, 5, 6]
     reordered = reorder_connectivity("C3D6", conn)
