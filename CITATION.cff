@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use med2limit in your research, please cite it as below."
+title: med2limit
+abstract: >
+  Convert Code_Aster MED/RMED simulation files to LIMIT_CAE .linp and .lui
+  input format for fatigue analysis. Supports DKT shell elements
+  (with REPLO/CARCOQUE handling), linear 3D solids (C3D8, C3D6) with
+  validated LIMIT node ordering, multi-step results, and mixed
+  shell + solid models with LIAISON_MAIL.
+authors:
+  - family-names: Nezzar
+    given-names: Dorian
+    affiliation: Simvia
+    email: dorian.ezzar@simvia.tech
+license: 
+version: 0.1.0
+date-released: 2026-06-17
+repository-code: "https://github.com/simvia-tech/med2limit"
+url: "https://github.com/simvia-tech/med2limit"
+keywords:
+  - Code_Aster
+  - LIMIT_CAE
+  - fatigue analysis
+  - finite element analysis
+  - MED format
+  - MEDCoupling
+  - mesh conversion
+type: software
