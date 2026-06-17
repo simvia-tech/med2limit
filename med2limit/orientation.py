@@ -89,14 +89,9 @@ class ShellMetadata:
 
         self.sig_to_idx = self._build_signature_index(rep1_mc)
         return True
-
+    
     @staticmethod
     def _build_signature_index(field_mc, ndigits=8):
-        """Build geometric-signature -> support-mesh-cell-index map.
-
-        Signature: sorted tuple of rounded (x, y, z) coordinates for the cell's nodes.
-        Same routine is applied later on active shell elements to look up the row.
-        """
         support_mesh = field_mc.getMesh()
         coords = support_mesh.getCoords().toNumPyArray()
         n_cells = support_mesh.getNumberOfCells()
@@ -104,7 +99,8 @@ class ShellMetadata:
 
         for i in range(n_cells):
             conn = [int(x) for x in support_mesh.getNodeIdsOfCell(i)]
-            if len(conn) != 3:
+            # Accept any 2D shell cell (3 or 4 nodes — triangles or quads)
+            if len(conn) not in (3, 4):
                 continue
             pts = [coords[nid] for nid in conn]
             sig = tuple(sorted(tuple(round(float(c), ndigits) for c in p) for p in pts))
@@ -114,14 +110,11 @@ class ShellMetadata:
 
 
 def build_active_shell_signatures(all_nodes, all_elements, ndigits=8):
-    """Build elem_id -> signature for all active S3 elements.
-
-    The signature is order-independent and matches the one used in
-    ShellMetadata._build_signature_index.
-    """
+    """Build elem_id -> signature for all active shell elements (S3 and S4)."""
     elem_to_sig = {}
+    SHELL_TYPES = {"S3", "S4"}
     for elem_id, elem_data in all_elements.items():
-        if elem_data["type"] != "S3":
+        if elem_data["type"] not in SHELL_TYPES:
             continue
         pts = [all_nodes[nid] for nid in elem_data["connectivity"]]
         sig = tuple(sorted(tuple(round(float(c), ndigits) for c in p) for p in pts))
