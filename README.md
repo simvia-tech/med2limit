@@ -4,22 +4,43 @@ Convert Code_Aster MED/RMED simulation results into LIMIT `.linp` / `.lui` input
 
 ## Features
 
-- Shell workflows (DKT elements: S3, S4, STRI65, S8R) with REPLO/CARCOQUE handling
+- Shell workflows (DKT elements: S3, S4) with REPLO/CARCOQUE handling
 - Linear solid workflows (C3D8 / HEXA8, C3D6 / PENTA6) with validated LIMIT node ordering
 - Multi-step / multi-increment displacement and stress transfer
 - Optional shell orientation file, or read directly from `IMPR_CONCEPT`-embedded result file
 - Automatic detection of shell support level (works for shell-only and mixed hexa+shell models)
-- Salome-safe execution (no `sys.exit`)
 
+## Code_aster Requirement
+- Identify weld groups as Group_NO (not Group_MA), 1 node set per weld
+- For shell element, extract top/bottom stresses as:
+```bash
+SIEF_SUP=POST_CHAMP(RESULTAT=RESU,
+                    EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
+                                  NUME_COUCHE=1,
+                                  NIVE_COUCHE='SUP',),);
+
+SIEF_INF=POST_CHAMP(RESULTAT=RESU,
+                    EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
+                                  NUME_COUCHE=1,
+                                  NIVE_COUCHE='INF',),);
+```
+- For shell element, extract orientation/tichkness as:
+```bash
+IMPR_CONCEPT(FORMAT='MED',
+             UNITE=80, --> Same unit as your results or in a dedicated file
+             CONCEPT=(_F(CARA_ELEM=Elem,
+                         REPERE_LOCAL='ELEM',
+                         MODELE=Modell,),),)                                  
+```
 ## Installation
-
-MEDCoupling with pip into a virtual python environnement (venv):
+Install med2limit with pip into a virtual python environnement (venv):
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install git+https://github.com/simvia-tech/med2limit.git@dev
 ```
+
 
 ## Usage
 
@@ -76,38 +97,6 @@ med2limit/
 ├── converter.py       # orchestrator (step_1 .. step_6 + convert)
 └── cli.py             # CLI + in-script config
 ```
-
-## Examples
-
-The `examples/` folder contains ready-to-run scripts for typical workflows:
-
-```bash
-python examples/01_shell_basic.py
-```
-
-Edit the paths at the top of each script before running.
-
-### Salome (embedded Python)
-
-Salome ships with its own Python interpreter, so a `pip install` in a conda env
-is not visible inside Salome. Use the provided launcher instead.
-
-1. Keep the package folder and the launcher together:
-   ```
-   my_workspace/
-   ├── med2limit/                      ← the package folder
-   └── run_med2limit_in_salome.py      ← edit and run this from Salome
-   ```
-
-2. Edit the CONFIGURATION block at the top of `run_med2limit_in_salome.py`
-   (paths, groups, nsets).
-
-3. In Salome: **File → Load Script** → choose `run_med2limit_in_salome.py`.
-
-The launcher inserts its own directory into `sys.path` so the embedded Python
-can `import med2limit` from source. MEDCoupling is already available inside
-Salome — no extra install needed. The launcher never calls `sys.exit()` so it
-will not terminate the Salome session.
 
 ## Testing
 
