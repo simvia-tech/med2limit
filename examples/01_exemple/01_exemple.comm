@@ -89,75 +89,16 @@ RESU=CALC_CHAMP(reuse =RESU,
                 CRITERES=('SIEQ_ELNO',),
                 DEFORMATION=('EPSI_ELNO',),);
 
-# SUP=>top Layer of a shell
-#SIEQ_SUP=POST_CHAMP(RESULTAT=RESU,
-#                    EXTR_COQUE=_F(NOM_CHAM='SIEQ_ELNO',
-#                                  NUME_COUCHE=1,
-#                                  NIVE_COUCHE='SUP',),);
-#
 SIEF_SUP=POST_CHAMP(RESULTAT=RESU,
                     EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
                                   NUME_COUCHE=1,
                                   NIVE_COUCHE='SUP',),);
 
-#SIEQ_SUP=CALC_CHAMP(reuse=SIEQ_SUP,
-#                    RESULTAT=SIEQ_SUP,
-#                    CRITERES='SIEQ_NOEU',);
-#
-#SIEF_SUP=CALC_CHAMP(reuse=SIEF_SUP,
-#                    RESULTAT=SIEF_SUP,
-#                    CONTRAINTE='SIEF_NOEU',);
-## ===============================================================================
-
-## Berechnen der Spannungen in der Mittelschicht des Schalenelements
-## MOY=>Centre Layer of a shell
-#SIEQ_MOY=POST_CHAMP(RESULTAT=RESU,
-#                    EXTR_COQUE=_F(NOM_CHAM='SIEQ_ELNO',
-#                                  NUME_COUCHE=1,
-#                                  NIVE_COUCHE='MOY',),);
-#
-#SIEF_MOY=POST_CHAMP(RESULTAT=RESU,
-#                    EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
-#                                  NUME_COUCHE=1,
-#                                  NIVE_COUCHE='MOY',),);
-#
-#SIEQ_MOY=CALC_CHAMP(reuse=SIEQ_MOY,
-#                    RESULTAT=SIEQ_MOY,
-#                    CRITERES='SIEQ_NOEU',);
-#
-#SIEF_MOY=CALC_CHAMP(reuse=SIEF_MOY,
-#                    RESULTAT=SIEF_MOY,
-#                    CONTRAINTE='SIEF_NOEU',);
-## ===============================================================================
-
-## Berechnen der Spannungen in der Unterseite des Schalenelements
-## INF=>Bottom Layer of a shell
-#SIEQ_INF=POST_CHAMP(RESULTAT=RESU,
-#                    EXTR_COQUE=_F(NOM_CHAM='SIEQ_ELNO',
-#                                  NUME_COUCHE=1,
-#                                  NIVE_COUCHE='INF',),);
-#
 SIEF_INF=POST_CHAMP(RESULTAT=RESU,
                     EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
                                   NUME_COUCHE=1,
                                   NIVE_COUCHE='INF',),);
 
-#SIEQ_INF=CALC_CHAMP(reuse=SIEQ_INF,
-#                    RESULTAT=SIEQ_INF,
-#                    CRITERES='SIEQ_NOEU',);
-#
-#SIEF_INF=CALC_CHAMP(reuse=SIEF_INF,
-#                    RESULTAT=SIEF_INF,
-#                    CONTRAINTE='SIEF_NOEU',);
-## ===============================================================================
-
-
-
-# ===============================================================================
-# TABLE DE VERIFICATION - Comparaison avec MEDCoupling
-# ===============================================================================
-
-# Sortie texte SIEF_ELNO SUP (face supérieure)
 IMPR_RESU(FORMAT='RESULTAT',
           UNITE=8,
           RESU=(
@@ -176,9 +117,6 @@ IMPR_RESU(FORMAT='RESULTAT',
                  NOM_CMP=('SIXX', 'SIYY', 'SIZZ', 'SIXY', 'SIXZ', 'SIYZ',),
                  TOUT_ORDRE='OUI',),
           ))
-
-
-
 
 IMPR_RESU(FORMAT='MED',
           UNITE=80,
