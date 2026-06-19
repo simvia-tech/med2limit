@@ -1,4 +1,4 @@
-<p align="center"><img src="logo/logo_med_coupling.png" alt="logo" width="50%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/simvia-tech/med2limit/refs/heads/main/logo/logo_med_coupling.png" alt="logo" width="50%"></p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![PyPI - Version](https://img.shields.io/pypi/v/med2limit)
@@ -65,11 +65,11 @@ With separate orientation file:
 med2limit 01_exemple.rmed output.linp output.lui 01_carcoc.rmed --groups "Shell1,Shell2" --nsets "WeldNo"
 ```
 # 01_exemple
-<img src="./examples/images/01_exemple_LIMIT.png" width="50%">
+<img src="https://raw.githubusercontent.com/simvia-tech/med2limit/main/examples/images/01_exemple_LIMIT.png" width="50%">
 Code_aster Shell-Shell geometry successfully imported in LIMIT Software
 
 # 02_exemple
-<img src="./examples/images/02_exemple_LIMIT.png" width="50%">
+<img src="https://raw.githubusercontent.com/simvia-tech/med2limit/main/examples/images/02_exemple_LIMIT.png" width="50%">
 Code_aster Solid-Shell geometry successfully imported in LIMIT Software
 
 ### Python API
