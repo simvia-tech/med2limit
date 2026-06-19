@@ -36,3 +36,4 @@ dist/
 # Ruff / mypy cache
 .ruff_cache/
 .mypy_cache/
+uv.lock
