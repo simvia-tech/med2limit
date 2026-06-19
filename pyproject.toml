@@ -1,21 +1,22 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=77.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "med2limit"
-version = "0.10.0"
+version = "0.0.1"
 description = "Convert Code_Aster MED/RMED simulation files to LIMIT .linp / .lui input format"
 readme = "README.md"
-requires-python = ">=3.9"
-license = { text = "Proprietary" }
+requires-python = ">=3.9,<=3.13"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
-    { name = "Dorian Ezzar" },
+    { name = "Dorian Nezzar", email= "dorian.nezzar@simvia.tech" },
 ]
 keywords = ["med", "rmed", "code_aster", "limit", "fea", "fatigue"]
 
 dependencies = [
-    "medcoupling",
+    "medcoupling>=9.15",
 ]
 
 [project.optional-dependencies]
