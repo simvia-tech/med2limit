@@ -43,7 +43,7 @@ Install med2limit with pip into a virtual python environnement (venv):
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install git+https://github.com/simvia-tech/med2limit.git@dev
+pip install med2limit
 ```
 
 
@@ -82,7 +82,7 @@ conv = MEDToLimitConverter(
     linp_filename="out.linp",
     lui_filename="out.lui",
     active_groups=["Shell1", "Shell2"],
-    active_nsets=["Weld"],
+    active_nsets=["WeldNo"],
 )
 conv.convert()
 ```
