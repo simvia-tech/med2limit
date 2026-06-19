@@ -7,7 +7,7 @@ name = "med2limit"
 version = "0.0.1"
 description = "Convert Code_Aster MED/RMED simulation files to LIMIT .linp / .lui input format"
 readme = "README.md"
-requires-python = ">=3.9,<=3.13"
+requires-python = ">=3.9,<3.14"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [
