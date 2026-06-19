@@ -1,8 +1,12 @@
 # Changelog
 
 
+## [0.0.2] - 2026-06-19
 
-## [0.1.0] - 2026-06-17
+### Added
+- CI/CD release pipeline
+
+## [0.0.1] - 2026-06-17
 
 ### Added
 - Initial public release of `med2limit`.
