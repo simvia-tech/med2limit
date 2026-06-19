@@ -1,4 +1,4 @@
-# Contributing to VS Code Aster
+# Contributing to med2limit
 
 Thank you for your interest in contributing to **med2limit**, a project developed by **Simvia SAS** ! We welcome contributions from everyone, whether it's reporting bugs, suggesting features, improving documentation, or submitting code.
 
