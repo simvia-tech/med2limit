@@ -1,4 +1,4 @@
-<img src="logo/logo_med_coupling.png" alt="logo" width="50%">
+<p align="center"><img src="logo/logo_med_coupling.png" alt="logo" width="50%"></p>
 
 # med2limit
 Convert Code_Aster MED/RMED simulation results into LIMIT `.linp` / `.lui` input files for fatigue analysis.
