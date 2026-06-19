@@ -1,6 +1,8 @@
 <p align="center"><img src="logo/logo_med_coupling.png" alt="logo" width="50%"></p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![PyPI - Version](https://img.shields.io/pypi/v/med2limit)
+[![CI](https://github.com/simvia-tech/med2limit/actions/workflows/ci.yml/badge.svg)](https://github.com/simvia-tech/med2limit/actions/workflows/ci.yml)
 
 # med2limit
 Convert Code_Aster MED/RMED simulation results into LIMIT `.linp` / `.lui` input files for fatigue analysis.
