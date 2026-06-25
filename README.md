@@ -119,6 +119,7 @@ pytest tests/test_element_types.py  # one module
 ## Known limitations
 
 - Quadratic solids (C3D10, C3D15, C3D20) — node ordering not yet validated in LIMIT
+- Shell elsets with mixed thicknesses use the most-frequent value (with warning)
 
 ## Acknowledgments
 
