@@ -9,15 +9,14 @@ Convert Code_Aster MED/RMED simulation results into LIMIT `.linp` / `.lui` input
 
 ## Features
 
-- Shell workflows (DKT elements: S3, S4) with REPLO/CARCOQUE handling
+- Shell workflows (DKT elements: S3, S4) with orientation (REPLO/CARCOQUE) handling
 - Linear solid workflows (C3D8 / HEXA8, C3D6 / PENTA6) with validated LIMIT node ordering
 - Multi-step / multi-increment displacement and stress transfer
-- Optional shell orientation file, or read directly from `IMPR_CONCEPT`-embedded result file
-- Automatic detection of shell support level (works for shell-only and mixed hexa+shell models)
+- Optional shell orientation file, or read directly from `IMPR_CONCEPT`- embedded result file
 
 ## Code_aster Requirement
-- Identify weld groups as Group_NO (not Group_MA), 1 node set per weld
-- For shell element, extract top/bottom stresses as:
+- Identify weld groups as Group_NO (not Group_MA), 1 node set per weld and duplicated node set and to have right and left weld node set.
+- For shell element, extract top/bottom, Ensure to name the concept "SIEF_SUP" and "SIEF_INF", as:
 ```bash
 SIEF_SUP=POST_CHAMP(RESULTAT=RESU,
                     EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
@@ -52,23 +51,27 @@ pip install med2limit
 ### Command line
 From 01_exemple in folder:
 ```bash
-med2limit/exemples/data
+med2limit/exemples/01_exemple
 ```
 
 ```bash
-med2limit 01_exemple.rmed output.linp output.lui --groups "Shell1,Shell2" --nsets "WeldNo"
+med2limit 01_exemple.rmed output.linp output.lui --groups "Shell1,Shell2" --nsets "WeldNO"
 ```
 
 With separate orientation file:
 
 ```bash
-med2limit 01_exemple.rmed output.linp output.lui 01_carcoc.rmed --groups "Shell1,Shell2" --nsets "WeldNo"
+med2limit 01_exemple.rmed output.linp output.lui 01_carcoc.rmed --groups "Shell1,Shell2" --nsets "WeldNO"
 ```
 # 01_exemple
 <img src="https://raw.githubusercontent.com/simvia-tech/med2limit/main/examples/images/01_exemple_LIMIT.png" width="50%">
 Code_aster Shell-Shell geometry successfully imported in LIMIT Software
 
+
 # 02_exemple
+```bash
+med2limit/exemples/02_exemple
+```
 <img src="https://raw.githubusercontent.com/simvia-tech/med2limit/main/examples/images/02_exemple_LIMIT.png" width="50%">
 Code_aster Solid-Shell geometry successfully imported in LIMIT Software
 
@@ -82,7 +85,7 @@ conv = MEDToLimitConverter(
     linp_filename="out.linp",
     lui_filename="out.lui",
     active_groups=["Shell1", "Shell2"],
-    active_nsets=["WeldNo"],
+    active_nsets=["WeldNO"],
 )
 conv.convert()
 ```
@@ -113,7 +116,6 @@ pytest tests/test_element_types.py   # one module
 ## Known limitations
 
 - Quadratic solids (C3D10, C3D15, C3D20) — node ordering not yet validated in LIMIT
-- Shell elsets with mixed thicknesses use the most-frequent value (with warning)
 
 ## Acknowledgments
 
