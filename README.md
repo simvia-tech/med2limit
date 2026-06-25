@@ -12,12 +12,25 @@ Convert Code_Aster MED/RMED simulation results into LIMIT `.linp` / `.lui` input
 - Shell workflows (DKT elements: S3, S4) with orientation (REPLO/CARCOQUE) handling
 - Linear solid workflows (C3D8 / HEXA8, C3D6 / PENTA6) with validated LIMIT node ordering
 - Multi-step / multi-increment displacement and stress transfer
-- Optional shell orientation file, or read directly from `IMPR_CONCEPT`- embedded result file
+- Optional shell orientation file, or read directly from `IMPR_CONCEPT` embedded result file
 
+## Requirement
+- Python 3.9 - 3.13
+- [Git LFS](https://git-lfs.com) (only needed if you clone the repository to access the example files)
+
+## Installation
+Install med2limit with pip into a virtual python environnement (venv):
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install med2limit
+```
 ## Code_aster Requirement
 - Identify weld groups as Group_NO (not Group_MA), 1 node set per weld and duplicated node set and to have right and left weld node set.
-- For shell element, extract top/bottom, Ensure to name the concept "SIEF_SUP" and "SIEF_INF", as:
+- For shell element, extract top/bottom stresses as:
 ```bash
+#Ensure to name the concept "SIEF_SUP" and "SIEF_INF"
 SIEF_SUP=POST_CHAMP(RESULTAT=RESU,
                     EXTR_COQUE=_F(NOM_CHAM='SIEF_ELNO',
                                   NUME_COUCHE=1,
@@ -36,16 +49,6 @@ IMPR_CONCEPT(FORMAT='MED',
                          REPERE_LOCAL='ELEM',
                          MODELE=Modell,),),)                                  
 ```
-## Installation
-Install med2limit with pip into a virtual python environnement (venv):
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install med2limit
-```
-
-
 ## Usage
 
 ### Command line
@@ -99,7 +102,7 @@ med2limit/
 ├── mesh.py            # nodes, elements, GROUP_MA, GROUP_NO
 ├── fields.py          # DEPL + SIEF over all timesteps
 ├── orientation.py     # REPLO + CARCOQUE (embedded or separate)
-├── filter.py          # active group selection + shell metadata mapping
+├── filter.py          # active group selection + shell metadata 
 ├── result_mapper.py   # per-timestep stress/displacement mapping
 ├── writer.py          # .linp + .lui output
 ├── converter.py       # orchestrator (step_1 .. step_6 + convert)
@@ -109,8 +112,8 @@ med2limit/
 ## Testing
 
 ```bash
-pytest                      # all tests
-pytest tests/test_element_types.py   # one module
+pytest                              # all tests
+pytest tests/test_element_types.py  # one module
 ```
 
 ## Known limitations
