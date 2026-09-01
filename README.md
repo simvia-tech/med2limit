@@ -116,6 +116,25 @@ pytest                              # all tests
 pytest tests/test_element_types.py  # one module
 ```
 
+## Publishing a new version
+
+Releases are fully automated via GitHub Actions and PyPI Trusted Publishing. To publish a new version:
+
+1. Update the `version` field in `pyproject.toml` (e.g. `1.2.0`).
+2. Add a `## [1.2.0]` section to `CHANGELOG.md` describing the changes. This section is mandatory: it is extracted automatically and used as the GitHub release notes.
+3. Merge these changes into `main`.
+4. Create and push a tag matching the version, from the merged commit on `main`:
+
+```bash
+git checkout main && git pull
+git tag 1.2.0
+git push origin 1.2.0
+```
+
+The `Release` workflow then runs the full CI suite (tests + build), and if everything passes, builds the distributions, publishes them to PyPI and creates the GitHub release with the changelog notes attached.
+
+The workflow will abort if the tag does not point to a commit on `main`, if the tag does not match the version in `pyproject.toml`, or if no matching section exists in `CHANGELOG.md`. No PyPI token is needed: publication uses OIDC Trusted Publishing.
+
 ## Known limitations
 
 - Quadratic solids (C3D10, C3D15, C3D20) — node ordering not yet validated in LIMIT
