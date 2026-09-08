@@ -77,3 +77,32 @@ def test_clean_name():
     assert clean_name("Shell_1") == "Shell1"
     assert clean_name("My_Group_Name") == "MyGroupName"
     assert clean_name("NoUnderscore") == "NoUnderscore"
+
+
+def test_clean_name_preserves_limit_prefixes():
+    """LIMIT recognizes 'PROF_' and 'SW_' as literal, underscore-including
+    prefixes (see formation slides: 'Generate Weld Sets by Properties
+    (incl. "PROF_" sets)' and 'préfixe "SW_"' for solid weld sets).
+
+    Stripping the underscore turns e.g. 'PROF_POA' into 'PROFPOA', which no
+    longer matches those conventions, so LIMIT files the set under
+    "Other Elsets"/"Other Nsets" instead of "Profile Sets"/"Solid Weld
+    Generation Elsets" — the exact discrepancy reported when comparing the
+    Aster-derived .linp against the Abaqus .inp in LIMIT.
+    """
+    assert clean_name("PROF_POA") == "PROF_POA"
+    assert clean_name("SW_POA") == "SW_POA"
+    # Underscores after the significant prefix are still cosmetic noise.
+    assert clean_name("PROF_POA_COR_1a") == "PROF_POACOR1a"
+    assert clean_name("SW_POA_COR_1a") == "SW_POACOR1a"
+
+
+def test_clean_name_honours_custom_significant_prefixes():
+    """Another study may flag its LIMIT sets with a different literal prefix
+    than PROF_/SW_. Callers must be able to say so instead of being stuck
+    with the hard-coded pair (which would silently de-underscore the prefix
+    and make LIMIT file the set under "Other Elsets").
+    """
+    assert clean_name("WELD_POA_1a", prefixes=("WELD_",)) == "WELD_POA1a"
+    # An explicit list replaces the defaults rather than extending them.
+    assert clean_name("PROF_POA", prefixes=("WELD_",)) == "PROFPOA"

@@ -75,6 +75,75 @@ def reorder_connectivity(elem_type: str, connectivity):
     return [connectivity[i] for i in order]
 
 
-def clean_name(name) -> str:
-    """Normalize a group name by removing underscores (LIMIT naming convention)."""
-    return str(name).replace("_", "")
+
+# Literal, underscore-including prefixes LIMIT matches to auto-classify
+# element sets (see the LIMIT training material):
+#   "PROF_" -> Profile Sets, consumed by "Generate Weld Sets by Properties
+#              (incl. 'PROF_' sets)" to build the shell weld sets.
+#   "SW_"   -> Solid Weld Generation Elsets, required by the Solid Weld
+#              Manager to pair up the plates on either side of a weld.
+# These prefixes must keep their underscore, or LIMIT can no longer match
+# them and files the set under "Other Nsets"/"Other Elsets" instead.
+LIMIT_SIGNIFICANT_PREFIXES = ("PROF_", "SW_")
+
+
+def clean_name(name, prefixes=None) -> str:
+    """Normalize a group name by removing underscores (LIMIT naming convention).
+
+    Underscores are cosmetic noise almost everywhere, but a handful of
+    literal prefixes are meaningful to LIMIT and must be preserved as-is
+    (see LIMIT_SIGNIFICANT_PREFIXES).
+
+    `prefixes` overrides that default list for studies using another
+    convention; it replaces the defaults rather than extending them.
+    """
+    name = str(name)
+    if prefixes is None:
+        prefixes = LIMIT_SIGNIFICANT_PREFIXES
+    for prefix in prefixes:
+        if name.startswith(prefix):
+            return prefix + name[len(prefix):].replace("_", "")
+    return name.replace("_", "")
+
+
+# Aster naming convention some models use to mark the element sets that
+# actually carry a material/thickness assignment (see the formation email:
+# "les sets de propriété sont ceux commencent par 'surfset' et 'solset'").
+# Checked after clean_name() has already stripped the underscore, so the
+# prefixes here are written without it.
+PROPERTY_SET_PREFIXES = ("surfset", "solset")
+
+
+def select_section_elsets(names, prefixes=None):
+    """Pick which (already clean_name'd) elset names should get a LIMIT
+    Section (i.e. count as a Property Set rather than a plain Elset).
+
+    If any name follows the surfset/solset convention, only those are
+    selected — every other GROUP_MA (weld lines, control/BC groups, raw
+    geometry import groups) has no material/thickness of its own and
+    should stay a plain Elset/Nset (LIMIT files it under "Other Elsets"/
+    "Other Nsets"), matching how the reference Abaqus model classifies
+    them (11 real Sections there vs. one per active elset before this
+    fix — see the Aster/Abaqus LIMIT tree comparison).
+
+    Falls back to selecting every name when the convention isn't used at
+    all, so models without surfset_/solset_ groups (e.g. the bundled
+    Shell1/Shell2 example) keep the original "one Section per elset"
+    behaviour.
+
+    `prefixes` overrides PROPERTY_SET_PREFIXES for studies naming their
+    property groups differently. Matching ignores case on both sides:
+    the same convention shows up as solset/SolSet/SOLSET depending on
+    who built the mesh.
+
+    Careful: the rule is global to the model. As soon as one name matches,
+    every other elset loses its Section — including one that legitimately
+    carries a material or a thickness under an unprefixed name. Callers
+    are expected to report the exclusions (see writer._write_sections).
+    """
+    names = list(names)
+    if prefixes is None:
+        prefixes = PROPERTY_SET_PREFIXES
+    prefixes = tuple(p.lower() for p in prefixes)
+    property_names = {n for n in names if n.lower().startswith(prefixes)}
+    return property_names or set(names)
