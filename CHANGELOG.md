@@ -1,5 +1,22 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+- Group names starting with a prefix LIMIT matches literally (`PROF_`, `SW_`)
+  keep their underscore, so LIMIT files them under *Profile Sets* and
+  *Solid Weld Generation Elsets* instead of *Other Nsets*/*Other Elsets*.
+- A `*Section` is no longer written for every active elset. Only the elsets
+  that carry a material/thickness (`solset`/`surfset` by default) become LIMIT
+  *Property Sets*; construction, boundary-condition and weld-line groups stay
+  plain elsets, matching the reference Abaqus model.
+
+### Added
+- `--limit-prefixes` and `--property-prefixes` to override both naming
+  conventions for studies that do not follow the default ones.
+- The writer now reports the elsets it left without a `*Section`, which would
+  otherwise reach LIMIT with no material or thickness unnoticed.
+
 
 ## [0.0.2] - 2026-06-19
 
