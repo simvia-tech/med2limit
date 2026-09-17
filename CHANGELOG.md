@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.0.3] - 2026-09-17
 
 ### Fixed
 - Group names starting with a prefix LIMIT matches literally (`PROF_`, `SW_`)
