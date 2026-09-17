@@ -66,6 +66,38 @@ With separate orientation file:
 ```bash
 med2limit 01_exemple.rmed output.linp output.lui 01_carcoc.rmed --groups "Shell1,Shell2" --nsets "WeldNO"
 ```
+
+### Set classification in LIMIT
+
+LIMIT decides how to file an imported set from its name and from whether it
+carries a section:
+
+| Group name | LIMIT classification |
+|---|---|
+| starts with `PROF_` | Profile Set |
+| starts with `SW_` | Solid Weld Generation Elset |
+| starts with `solset` / `surfset` | Property Set (gets a `*Section`) |
+| anything else | Other Elset / Other Nset |
+
+`PROF_` and `SW_` are matched literally, underscore included, so those
+underscores are preserved while the rest of the name is normalized
+(`PROF_POA_COR_1a` becomes `PROF_POACOR1a`).
+
+Only the property groups get a `*Section`: they are the ones with a material
+and a thickness. Every other `GROUP_MA` (construction groups, boundary
+conditions, weld lines) stays a plain elset. The converter prints the list of
+elsets it left without a section — check it, because an elset that needed a
+property but does not follow the naming convention reaches LIMIT without one.
+
+Both conventions are overridable when a study uses different names:
+
+```bash
+med2limit model.rmed out.linp out.lui \
+  --limit-prefixes "PROF_,SW_" --property-prefixes "solset,surfset"
+```
+
+Property prefixes are matched case-insensitively; the LIMIT prefixes are not.
+Omitting an option keeps the built-in convention shown in the table above.
 # 01_exemple
 <img src="https://raw.githubusercontent.com/simvia-tech/med2limit/main/examples/images/01_exemple_LIMIT.png" width="50%">
 Code_aster Shell-Shell geometry successfully imported in LIMIT Software

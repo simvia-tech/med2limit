@@ -13,6 +13,7 @@ from .element_types import (
     is_beam_or_truss,
     reorder_connectivity,
     get_reorder_indices,
+    select_section_elsets,
 )
 from .result_mapper import representative_shell_thickness
 
@@ -73,9 +74,13 @@ def _write_node_sets(f, node_sets):
             f.write(", ".join(map(str, ids[i:i + 16])) + "\n")
 
 
-def _write_sections(f, element_sets, shell_thickness):
+def _write_sections(f, element_sets, shell_thickness, property_prefixes=None):
     f.write("**\n** Section Definitions\n")
+    section_names = select_section_elsets(element_sets.keys(), property_prefixes)
+    _report_excluded_sections(element_sets.keys(), section_names)
     for name, data in sorted(element_sets.items()):
+        if name not in section_names:
+            continue
         elem_type = data["type"]
         if is_solid(elem_type):
             f.write(f"*Solid Section, elset={name}, material=MAT1\n,\n")
@@ -87,14 +92,34 @@ def _write_sections(f, element_sets, shell_thickness):
             f.write(f"** Beam/Truss section for {name} - define as needed\n")
 
 
+def _report_excluded_sections(all_names, section_names):
+    """Say out loud which elsets were left without a Section.
+
+    An excluded elset reaches LIMIT as a plain Elset: no material, no
+    thickness. That is the intent for construction/BC/weld-line groups,
+    but it silently loses a group that did need a property and just
+    doesn't follow the naming convention (see select_section_elsets).
+    Without this line the only way to catch it is to import the file into
+    LIMIT and count the Property Sets against a reference model by hand.
+    """
+    excluded = sorted(set(all_names) - set(section_names))
+    if not excluded:
+        return
+    print(f"  WARNING: {len(excluded)} of {len(set(all_names))} elsets got no Section "
+          f"(no material/thickness in LIMIT) — they do not match the property-set "
+          f"naming convention:")
+    print(f"           {', '.join(excluded)}")
+
+
 def _write_geometry_block(f, source_filename, all_nodes, all_elements,
-                         element_sets, node_sets, shell_thickness):
+                         element_sets, node_sets, shell_thickness,
+                         property_prefixes=None):
     _write_header(f, source_filename)
     _write_nodes(f, all_nodes)
     _write_elements(f, all_elements)
     _write_element_sets(f, element_sets)
     _write_node_sets(f, node_sets)
-    _write_sections(f, element_sets, shell_thickness)
+    _write_sections(f, element_sets, shell_thickness, property_prefixes)
     f.write("**\n** End of geometry definition\n")
 
 
@@ -103,10 +128,11 @@ def _write_geometry_block(f, source_filename, all_nodes, all_elements,
 # ============================================================================
 
 class LinpWriter:
-    def __init__(self, mesh, filter_, source_filename):
+    def __init__(self, mesh, filter_, source_filename, property_prefixes=None):
         self.mesh = mesh
         self.filter = filter_
         self.source_filename = source_filename
+        self.property_prefixes = property_prefixes
 
     def write(self, path):
         print(f"\nWriting .linp file: {path}")
@@ -119,6 +145,7 @@ class LinpWriter:
                 self.mesh.element_sets,
                 self.mesh.node_sets,
                 self.filter.shell_thickness,
+                self.property_prefixes,
             )
         print(f"  Wrote {len(self.mesh.all_nodes)} nodes, "
               f"{len(self.mesh.all_elements)} elements, "
@@ -131,11 +158,12 @@ class LinpWriter:
 # ============================================================================
 
 class LuiWriter:
-    def __init__(self, mesh, filter_, fields, source_filename):
+    def __init__(self, mesh, filter_, fields, source_filename, property_prefixes=None):
         self.mesh = mesh
         self.filter = filter_
         self.fields = fields
         self.source_filename = source_filename
+        self.property_prefixes = property_prefixes
 
     def write(self, path):
         from .result_mapper import ResultMapper
@@ -150,6 +178,7 @@ class LuiWriter:
                 self.mesh.element_sets,
                 self.mesh.node_sets,
                 self.filter.shell_thickness,
+                self.property_prefixes,
             )
 
             n_ts = self.fields.n_timesteps

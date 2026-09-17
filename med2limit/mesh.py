@@ -20,10 +20,12 @@ class MeshExtractor:
     - user_element_group_names: set[str]  (names that came from GROUP_MA)
     """
 
-    def __init__(self, meshes, active_groups=None, active_nsets=None):
+    def __init__(self, meshes, active_groups=None, active_nsets=None,
+                 limit_prefixes=None):
         self.meshes = meshes
         self.active_groups = set(active_groups or [])
         self.active_nsets = set(active_nsets or [])
+        self.limit_prefixes = tuple(limit_prefixes) if limit_prefixes else None
 
         self.all_nodes = {}
         self.all_elements = {}
@@ -32,6 +34,14 @@ class MeshExtractor:
         self.user_element_group_names = set()
 
     # ---------------------------------------------------------------- public
+
+    def _clean(self, name):
+        """Normalize a MED group name to its LIMIT set name.
+
+        Wraps clean_name() with this run's significant-prefix list so a
+        study using another convention than PROF_/SW_ keeps its prefixes.
+        """
+        return clean_name(name, self.limit_prefixes)
 
     def extract_all(self):
         """Run all extraction steps in the right order."""
@@ -107,7 +117,7 @@ class MeshExtractor:
                 node_group_names = mesh.getGroupsOnSpecifiedLev(1)
                 for gname in node_group_names:
                     arr = mesh.getGroupArr(1, gname).toNumPyArray()
-                    cname = clean_name(gname)
+                    cname = self._clean(gname)
                     adjusted = [int(n) + node_offset + 1 for n in arr]
                     self.node_sets.setdefault(cname, []).extend(adjusted)
             except Exception:
@@ -129,7 +139,7 @@ class MeshExtractor:
                 except Exception:
                     continue
                 for gname in elem_group_names:
-                    if self.active_groups and clean_name(gname) not in self.active_groups \
+                    if self.active_groups and self._clean(gname) not in self.active_groups \
                             and gname not in self.active_groups:
                         # If an explicit active_groups filter is set, skip non-matching names
                         # We compare both raw and cleaned form for convenience.
@@ -137,7 +147,7 @@ class MeshExtractor:
 
                     local_ids = mesh.getGroupArr(level, gname).toNumPyArray()
                     global_ids = [int(l) + level_offset[level] + 1 for l in local_ids]
-                    cname = clean_name(gname)
+                    cname = self._clean(gname)
 
                     elem_type = None
                     for eid in global_ids:
@@ -182,7 +192,7 @@ class MeshExtractor:
                 except Exception:
                     continue
                 for gname in elem_group_names:
-                    cname = clean_name(gname)
+                    cname = self._clean(gname)
                     # Only treat as nset if requested AND not already a real node set
                     if cname not in self.active_nsets:
                         continue

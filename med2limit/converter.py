@@ -27,13 +27,17 @@ class MEDToLimitConverter:
 
     def __init__(self, med_filename, linp_filename, lui_filename,
                  orientation_med_filename=None,
-                 active_groups=None, active_nsets=None):
+                 active_groups=None, active_nsets=None,
+                 limit_prefixes=None, property_prefixes=None):
         self.med_filename = med_filename
         self.linp_filename = linp_filename
         self.lui_filename = lui_filename
         self.orientation_med_filename = orientation_med_filename
         self.active_groups = list(active_groups or [])
         self.active_nsets = list(active_nsets or [])
+        # None means "use the built-in conventions" (see element_types.py).
+        self.limit_prefixes = limit_prefixes
+        self.property_prefixes = property_prefixes
 
         # Filled at runtime
         self.reader = None
@@ -57,7 +61,8 @@ class MEDToLimitConverter:
         """Extract nodes, elements, element groups and node groups."""
         print("\nExtracting mesh...")
         self.mesh = MeshExtractor(
-            self.reader.meshes, self.active_groups, self.active_nsets
+            self.reader.meshes, self.active_groups, self.active_nsets,
+            limit_prefixes=self.limit_prefixes,
         )
         self.mesh.extract_all()
         print(f"  Total nodes: {len(self.mesh.all_nodes)}")
@@ -102,8 +107,14 @@ class MEDToLimitConverter:
 
     def step_6_write(self):
         """Write the .linp and .lui output files."""
-        LinpWriter(self.mesh, self.filter, self.med_filename).write(self.linp_filename)
-        LuiWriter(self.mesh, self.filter, self.fields, self.med_filename).write(self.lui_filename)
+        LinpWriter(
+            self.mesh, self.filter, self.med_filename,
+            property_prefixes=self.property_prefixes,
+        ).write(self.linp_filename)
+        LuiWriter(
+            self.mesh, self.filter, self.fields, self.med_filename,
+            property_prefixes=self.property_prefixes,
+        ).write(self.lui_filename)
 
     # --------------------------------------------------------------- full
 
